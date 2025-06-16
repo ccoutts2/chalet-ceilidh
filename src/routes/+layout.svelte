@@ -4,6 +4,7 @@
 	import NavBar from '$lib/components/navigation/NavBar.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import { ChevronLeft } from '@lucide/svelte';
+	import MenuOverlay from '$lib/components/navigation/MenuOverlay.svelte';
 
 	let { children }: { children: Snippet } = $props();
 </script>
@@ -43,9 +44,7 @@
 				<NavLink href="/contact">Contact</NavLink>
 			</li>
 		</ul>
-		<div class="md:hidden">
-			<p class="text-sm uppercase">Menu</p>
-		</div>
+		<MenuOverlay />
 	</NavBar>
 </header>
 
@@ -56,8 +55,8 @@
 
 	.Header {
 		backdrop-filter: blur(12px);
-		position: sticky;
-		top: 0;
+		// position: sticky;
+		// top: 0;
 
 		&__navList {
 			display: none;
