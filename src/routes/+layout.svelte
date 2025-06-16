@@ -1,7 +1,137 @@
 <script lang="ts">
-	import '../app.css';
+	import '../lib/styles/globals.css';
+	import type { Snippet } from 'svelte';
+	import NavBar from '$lib/components/navigation/NavBar.svelte';
+	import NavLink from '$lib/components/navigation/NavLink.svelte';
+	import { ChevronLeft } from '@lucide/svelte';
 
-	let { children } = $props();
+	let { children }: { children: Snippet } = $props();
 </script>
 
+<header class="Header">
+	<NavBar>
+		<div class="max-h-40 max-w-40 md:max-h-60 md:max-w-60">
+			<img
+				src="assets/logos/chalet-ceilidh-logo.png"
+				alt="Logo displaying the text that chalet ceilidh is a luxury chalet in the Swiss Alps"
+				class="h-full w-full fill-black object-cover"
+			/>
+		</div>
+
+		<ul class="Header__navList">
+			<li class="Header__navItem">
+				<div class="Header__navDropdown">
+					<p>Layout</p>
+					<span class="Header__dropdownLogo"><ChevronLeft /></span>
+				</div>
+				<menu class="DropdownMenu">
+					<li><NavLink class="flex w-full" href="/layout/living">Living</NavLink></li>
+					<li><NavLink class="flex w-full" href="/layout/sleeping">Sleeping</NavLink></li>
+					<li><NavLink class="flex w-full" href="/layout/relaxing">Relaxing</NavLink></li>
+				</menu>
+			</li>
+			<li class="Header__navItem">
+				<NavLink href="/winter">Winter</NavLink>
+			</li>
+			<li class="Header__navItem">
+				<NavLink href="/summer">Summer</NavLink>
+			</li>
+			<li class="Header__navItem">
+				<NavLink href="/getting-here">Getting here</NavLink>
+			</li>
+			<li class="Header__navItem">
+				<NavLink href="/contact">Contact</NavLink>
+			</li>
+		</ul>
+		<div class="md:hidden">
+			<p class="text-sm uppercase">Menu</p>
+		</div>
+	</NavBar>
+</header>
+
 {@render children()}
+
+<style lang="scss">
+	@use '../lib/styles/partials/breakpoints';
+
+	.Header {
+		backdrop-filter: blur(12px);
+		position: sticky;
+		top: 0;
+
+		&__navList {
+			display: none;
+
+			@include breakpoints.desktop {
+				display: flex;
+				gap: 2rem;
+			}
+		}
+
+		&__navItem {
+			position: relative;
+		}
+
+		&__navDropdown {
+			cursor: pointer;
+			display: flex;
+			gap: 0.5rem;
+		}
+
+		&__dropdownLogo {
+			display: inline-block;
+			transform: rotate(0deg);
+			transition: transform 0.3s ease-out;
+		}
+
+		&__navItem {
+			text-transform: capitalize;
+		}
+
+		&__navItem:first-child:hover {
+			.DropdownMenu {
+				max-height: 10rem;
+				opacity: 1;
+				pointer-events: auto;
+				transform: translateY(0);
+				visibility: visible;
+			}
+
+			.Header__dropdownLogo {
+				transform: rotate(-90deg);
+			}
+		}
+	}
+
+	.DropdownMenu {
+		display: flex;
+		flex-direction: column;
+		left: 0;
+		max-height: 0;
+		min-width: 8rem;
+		opacity: 0;
+		overflow: hidden;
+		padding: 0.5rem 0;
+		pointer-events: none;
+		position: absolute;
+		top: 100%;
+		transform: translateY(-10px);
+		transition:
+			opacity 0.3s ease-out,
+			visibility 0.3s ease-out,
+			max-height 0.4s ease-out,
+			transform 0.3s ease-out;
+		visibility: hidden;
+		z-index: 1000;
+
+		li {
+			padding: 0.5rem;
+			width: 100%;
+
+			&:hover {
+				background-color: #f0f0f0;
+				border-radius: 1rem;
+			}
+		}
+	}
+</style>
