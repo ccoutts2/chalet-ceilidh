@@ -4,6 +4,7 @@
 	import type { Attachment } from 'svelte/attachments';
 
 	import NavLink from './NavLink.svelte';
+	import { ChevronLeft } from '@lucide/svelte';
 
 	let tl: GSAPTimeline;
 
@@ -62,15 +63,38 @@
 			<li class="MenuOverlay__item">
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
-						class="!text-4xl leading-[95%] tracking-tight"
+						class="!text-4xl tracking-tight"
 						onclick={(e: MouseEvent) => handleNavigation(e, '/layout')}>Layout</NavLink
 					>
+
+					<menu class="SideMenu">
+						<li>
+							<NavLink
+								class="flex w-full"
+								onclick={(e: MouseEvent) => handleNavigation(e, '/layout/living')}>Living /</NavLink
+							>
+						</li>
+						<li>
+							<NavLink
+								class="flex w-full"
+								onclick={(e: MouseEvent) => handleNavigation(e, '/layout/sleeping')}
+								>Sleeping /</NavLink
+							>
+						</li>
+						<li>
+							<NavLink
+								class="flex w-full"
+								onclick={(e: MouseEvent) => handleNavigation(e, '/layout/relaxing')}
+								>Relaxing /</NavLink
+							>
+						</li>
+					</menu>
 				</div>
 			</li>
 			<li class="MenuOverlay__item">
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
-						class="!text-4xl leading-[95%] tracking-tight"
+						class="!text-4xl tracking-tight"
 						onclick={(e: MouseEvent) => handleNavigation(e, '/winter')}>Winter</NavLink
 					>
 				</div>
@@ -78,7 +102,7 @@
 			<li class="MenuOverlay__item">
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
-						class="!text-4xl leading-[95%] tracking-tight"
+						class="!text-4xl tracking-tight"
 						onclick={(e: MouseEvent) => handleNavigation(e, '/summer')}>Summer</NavLink
 					>
 				</div>
@@ -86,7 +110,7 @@
 			<li class="MenuOverlay__item">
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
-						class="!text-4xl leading-[95%] tracking-tight"
+						class="!text-4xl tracking-tight"
 						onclick={(e: MouseEvent) => handleNavigation(e, '/getting-here')}>Getting here</NavLink
 					>
 				</div>
@@ -94,7 +118,7 @@
 			<li class="MenuOverlay__item">
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
-						class="!text-4xl leading-[95%] tracking-tight"
+						class="!text-4xl tracking-tight"
 						onclick={(e: MouseEvent) => handleNavigation(e, '/contact')}>Contact</NavLink
 					>
 				</div>
@@ -110,7 +134,6 @@
 	.MenuOverlay {
 		@include mixins.flex($direction: column, $justify: flex-start);
 		background: #f0f8ff;
-		font-family: HankenGrotesk-Regular;
 		height: 100vh;
 		inset: 0;
 		overflow: hidden;
@@ -123,19 +146,19 @@
 
 		&__button {
 			position: absolute;
-			top: 1rem;
 			right: 1rem;
+			top: 1rem;
 			z-index: 999;
 		}
 
 		&__nav {
 			color: black;
 			height: 100vh;
-			padding: 1rem;
-			width: 100vw;
 			left: 0;
+			padding: 1rem;
 			position: absolute;
 			top: 0;
+			width: 100vw;
 			z-index: 10;
 		}
 
@@ -145,13 +168,36 @@
 		}
 
 		&__item {
+			cursor: pointer;
+			border-bottom: 1px solid black;
 			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-			max-width: fit-content;
+			overflow: hidden;
+			position: relative;
+			width: 100%;
 		}
 
 		&__itemHolder {
 			position: relative;
 			text-transform: capitalize;
+			width: 100%;
+
+			&:first-child {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
+		}
+	}
+
+	.SideMenu {
+		display: flex;
+		font-size: 0.875rem;
+		padding-top: 0.5rem;
+		width: 100%;
+
+		li {
+			width: 100%;
+			white-space: nowrap;
 		}
 	}
 
