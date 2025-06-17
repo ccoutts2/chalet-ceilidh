@@ -15,7 +15,7 @@
 			<img
 				src="assets/logos/chalet-ceilidh-logo.png"
 				alt="Logo displaying the text that chalet ceilidh is a luxury chalet in the Swiss Alps"
-				class="h-full w-full fill-black object-cover"
+				class="Header__image"
 			/>
 		</div>
 
@@ -55,8 +55,13 @@
 
 	.Header {
 		backdrop-filter: blur(12px);
-		// position: sticky;
-		// top: 0;
+
+		&__image {
+			filter: invert(10%) sepia(7%) saturate(1269%) hue-rotate(185deg) brightness(88%) contrast(86%);
+			height: 100%;
+			object-fit: cover;
+			width: 100%;
+		}
 
 		&__navList {
 			display: none;

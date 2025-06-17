@@ -1,3 +1,5 @@
+// Hanken Grotesk
+
 @font-face {
 	font-family: 'HankenGrotesk-Light';
 	src: url('assets/fonts/HankenGrotesk-Light.ttf') format('truetype');
@@ -21,4 +23,21 @@
 @font-face {
 	font-family: 'Cyrene';
 	src: url('assets/fonts/Cyrene+Regular+Advanced.otf') format('truetype');
+}
+
+// Playfair
+
+@font-face {
+	font-family: 'Playfair-Light';
+	src: url('assets/fonts/PlayfairDisplay-Light.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Playfair-Regular';
+	src: url('assets/fonts/PlayfairDisplay-Regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Playfair-Bold';
+	src: url('assets/fonts/PlayfairDisplay-Bold.ttf') format('truetype');
 }

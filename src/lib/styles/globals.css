@@ -23,20 +23,26 @@
 	}
 
 	body {
-		background-color: #e5e7eb;
+		background-color: #eee9e2;
+		color: #24262b;
 		font-weight: 400;
 		min-height: 100vh;
 		position: relative;
 		letter-spacing: 1px;
 	}
 
+	h1,
 	h2 {
-		font-size: clamp(2.5rem, 3vw, 4rem) !important;
+		font-family: Playfair-Regular;
+	}
+
+	h2 {
+		font-size: clamp(2rem, 3vw, 3rem) !important;
 		font-weight: 400;
 	}
 
 	h3 {
-		font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+		font-size: clamp(1.25rem, 3vw, 2rem) !important;
 		font-weight: 400;
 	}
 
@@ -66,15 +72,5 @@
 		font-family: HankenGrotesk-Regular !important;
 		cursor: pointer;
 		outline: inherit;
-	}
-
-	.sticky {
-		min-height: 100vh;
-		position: sticky;
-		top: 0;
-	}
-
-	.scrolled {
-		transform: translate(0, calc(-100% - 1rem));
 	}
 }
