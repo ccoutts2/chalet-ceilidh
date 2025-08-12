@@ -52,12 +52,12 @@
 
 			step.to(next, {
 				clipPath: 'inset(0% 0% 0% 0%)',
-				duration: 2,
+				duration: 3.5,
 				ease: 'power4.inOut'
 			});
 
 			step.set(current, { zIndex: 0 });
-			step.to({}, { duration: 2 });
+			step.to({}, { duration: 3 });
 
 			timeline.add(step);
 		}

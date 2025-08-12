@@ -4,7 +4,6 @@
 	import type { Attachment } from 'svelte/attachments';
 
 	import NavLink from './NavLink.svelte';
-	import { ChevronLeft } from '@lucide/svelte';
 
 	let tl: GSAPTimeline;
 
@@ -24,7 +23,7 @@
 	const createMenuOverlayAnimation: Attachment = (container) => {
 		tl = gsap.timeline({ paused: true });
 
-		gsap.set(container, { clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0%)' });
+		gsap.set(container, { opacity: 1, clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0%)' });
 
 		gsap.set('.MenuOverlay__itemHolder', {
 			y: 75
@@ -136,6 +135,7 @@
 		background: #f0f8ff;
 		height: 100vh;
 		inset: 0;
+		opacity: 0;
 		overflow: hidden;
 		position: fixed;
 		z-index: 9;

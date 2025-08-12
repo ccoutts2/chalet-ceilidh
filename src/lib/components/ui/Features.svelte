@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { data, heading }: { data: any; heading: 'Features' | 'Creature Comforts' } = $props();
+	let { data, heading }: { data: any; heading: string } = $props();
 </script>
 
 <section class="Features">

@@ -3,8 +3,8 @@
 	import type { Snippet } from 'svelte';
 	import NavBar from '$lib/components/navigation/NavBar.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
-	import { ChevronLeft } from '@lucide/svelte';
 	import MenuOverlay from '$lib/components/navigation/MenuOverlay.svelte';
+	import { ChevronLeft } from '@lucide/svelte';
 
 	let { children }: { children: Snippet } = $props();
 </script>
@@ -13,7 +13,7 @@
 	<NavBar>
 		<div class="max-h-40 max-w-40 md:max-h-60 md:max-w-60">
 			<img
-				src="assets/logos/chalet-ceilidh-logo.png"
+				src="/assets/logos/chalet-ceilidh-logo.png"
 				alt="Logo displaying the text that chalet ceilidh is a luxury chalet in the Swiss Alps"
 				class="Header__image"
 			/>
@@ -32,10 +32,10 @@
 				</menu>
 			</li>
 			<li class="Header__navItem">
-				<NavLink href="/winter">Winter</NavLink>
+				<NavLink href="/season/winter">Winter</NavLink>
 			</li>
 			<li class="Header__navItem">
-				<NavLink href="/summer">Summer</NavLink>
+				<NavLink href="/season/summer">Summer</NavLink>
 			</li>
 			<li class="Header__navItem">
 				<NavLink href="/getting-here">Getting here</NavLink>
@@ -129,7 +129,7 @@
 		z-index: 1000;
 
 		li {
-			padding: 0.5rem;
+			padding: 0.5rem 0.25rem;
 			width: 100%;
 
 			&:hover {
