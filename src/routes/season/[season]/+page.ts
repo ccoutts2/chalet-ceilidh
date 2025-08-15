@@ -1,7 +1,7 @@
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 import { seasonPageData } from '$lib/data/season';
 
-export const load: PageServerLoad = ({ params }) => {
+export const load: PageLoad = ({ params }) => {
 	const { season } = params;
 
 	const pageContent = seasonPageData.find((pageData) => pageData.slug === season);

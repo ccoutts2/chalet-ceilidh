@@ -1,7 +1,7 @@
-import type { PageServerLoad } from './$types';
+import type { PageLoad } from './$types';
 import { layoutPageData } from '$lib/data/layout';
 
-export const load: PageServerLoad = ({ params }) => {
+export const load: PageLoad = ({ params }) => {
 	const { layout } = params;
 
 	const pageContent = layoutPageData.find((pageData) => pageData.slug === layout);
