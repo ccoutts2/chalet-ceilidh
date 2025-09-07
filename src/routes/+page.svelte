@@ -73,7 +73,9 @@
 			</p>
 		</div>
 		<section class="Home__sectionRow relative h-[175vh] gap-8">
-			<div class="sticky top-0 flex h-[75vh] max-w-[80ch] flex-[1.25] flex-col gap-6 leading-7">
+			<div
+				class="sticky top-0 flex h-[75vh] max-w-[80ch] flex-[1.25] flex-col gap-6 pt-12 leading-7"
+			>
 				<p>
 					This luxury holiday home sits on a large plot of land with panoramic views of the
 					surrounding peaks of the “Imperial Crown” and is within easy walking distance of the

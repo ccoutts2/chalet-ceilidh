@@ -4,21 +4,26 @@
 	import Carousel from '$lib/components/ui/Carousel.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
 	let { data }: PageProps = $props();
+
+	const { title, pageDescription, carouselItems, features, creatureComforts, copy } =
+		data.pageContent;
 </script>
 
-<PageLayout title="Layout | {data.pageContent.title}">
+<PageLayout title="Layout | {title}">
 	<div class="py-8 md:py-12">
-		<p>{data.pageContent.pageDescription}</p>
+		<p>{pageDescription}</p>
 	</div>
-	<Carousel data={data.pageContent.carouselItems} />
-	{#if data.pageContent.features.length}
-		<Features data={data.pageContent.features} heading="Features" />
+	<Carousel data={carouselItems} />
+	{#if features.length}
+		<Features data={features} heading="Features" />
 	{/if}
-	{#if data.pageContent.creatureComforts?.length}
-		<Features data={data.pageContent.creatureComforts} heading="Creature Comforts" />
+	{#if creatureComforts?.length}
+		<Features data={creatureComforts} heading="Creature Comforts" />
 	{/if}
-	<div class="py-8 md:py-12">
-		<p>{data.pageContent.copy}</p>
+	<div class="flex flex-col gap-4 py-8 md:py-12 lg:flex-row">
+		{#each copy as sentence}
+			<p>{sentence}</p>
+		{/each}
 	</div>
 </PageLayout>
 

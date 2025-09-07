@@ -1,3 +1,31 @@
+@font-face {
+	font-family: ClashGrotesk-Light;
+	src:
+		url('/assets/fonts/ClashGrotesk-Light.woff2') format('woff2'),
+		url('/assets/fonts/ClashGrotesk-Light.woff') format('woff');
+}
+
+@font-face {
+	font-family: ClashGrotesk-Regular;
+	src:
+		url('/assets/fonts/ClashGrotesk-Regular.woff2') format('woff2'),
+		url('/assets/fonts/ClashGrotesk-Regular.woff') format('woff');
+}
+
+@font-face {
+	font-family: ClashGrotesk-Semibold;
+	src:
+		url('/assets/fonts/ClashGrotesk-Semibold.woff2') format('woff2'),
+		url('/assets/fonts/ClashGrotesk-Semibold.woff') format('woff');
+}
+
+@font-face {
+	font-family: ClashGrotesk-Bold;
+	src:
+		url('/assets/fonts/ClashGrotesk-Bold.woff2') format('woff2'),
+		url('/assets/fonts/ClashGrotesk-Bold.woff') format('woff');
+}
+
 // Hanken Grotesk
 
 @font-face {

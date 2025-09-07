@@ -68,7 +68,7 @@ export const layoutPageData: Layout[] = [
 		slug: 'sleeping',
 		title: 'Sleeping',
 		pageDescription:
-			'Individually designed bedrooms on the lower ground floor of Chalet Ceilidh. They are all have glass doors leading to the garden and all have stunning views of the mountains',
+			'Individually designed bedrooms on the lower ground floor of Chalet Ceilidh. They all have glass doors leading to the garden and all have stunning views of the mountains',
 		carouselItems: [
 			{
 				src: '/assets/images/layout/living/swiss-ski-chalet-1.jpg',
