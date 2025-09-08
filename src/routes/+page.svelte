@@ -156,7 +156,7 @@
 		@include mixins.max-content($maxWidth: variables.$content--max-width--lg);
 		display: flex;
 		flex-direction: column;
-		padding: 3rem 1rem;
+		padding: 5rem 1rem;
 
 		@include breakpoints.tablet {
 			padding-inline: 3rem;

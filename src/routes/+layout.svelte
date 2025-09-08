@@ -54,7 +54,11 @@
 	@use '../lib/styles/partials/variables';
 
 	.Header {
-		backdrop-filter: blur(12px);
+		background-color: #eee9e2;
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index: 900;
 
 		&__navList {
 			display: none;
@@ -121,7 +125,6 @@
 			max-height 0.4s ease-out,
 			transform 0.3s ease-out;
 		visibility: hidden;
-		z-index: 100000;
 
 		li {
 			padding: 0.5rem 0.25rem;
