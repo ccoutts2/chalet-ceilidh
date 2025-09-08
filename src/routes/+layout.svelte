@@ -7,8 +7,11 @@
 	import { ChevronLeft } from '@lucide/svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Logo from '$lib/components/Logo.svelte';
+	import type { LayoutData } from './$types';
 
-	let { children }: { children: Snippet } = $props();
+	let { children, data }: { children: Snippet; data: LayoutData } = $props();
+
+	import { fade } from 'svelte/transition';
 </script>
 
 <header class="Header">
@@ -43,8 +46,11 @@
 		<MenuOverlay />
 	</NavBar>
 </header>
-
-{@render children()}
+{#key data.url}
+	<div in:fade={{ duration: 350 }}>
+		{@render children()}
+	</div>
+{/key}
 
 <Footer />
 

@@ -96,7 +96,7 @@
 	<div class="Home__sectionRow">
 		<div>
 			<h1 class="Home__title">Chalet Celidh Zinal</h1>
-			<p class="text-4xl text-pretty italic">( pronounced kaylee )</p>
+			<p class="text-2xl text-pretty italic">( pronounced kaylee )</p>
 		</div>
 		<p>
 			Chalet Ceilidh is an outstanding luxury ski chalet and one of the few privately owned chalets
@@ -106,6 +106,7 @@
 	</div>
 	<section class="Home__sectionRow | relative gap-8 xl:max-h-[175vh]">
 		<div class="Home__information">
+			<h2>About Chalet Ceilidh</h2>
 			<p>
 				This luxury holiday home sits on a large plot of land with panoramic views of the
 				surrounding peaks of the “Imperial Crown” and is within easy walking distance of the village
@@ -213,7 +214,7 @@
 
 			@include breakpoints.desktop {
 				position: sticky;
-				top: 0;
+				top: 2rem;
 				height: 75vh;
 				max-width: 80ch;
 				flex: 1.25;
