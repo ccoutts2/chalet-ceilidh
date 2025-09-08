@@ -4,6 +4,12 @@
 	import Features from '$lib/components/ui/Features.svelte';
 	import type { Cards } from '$lib/types';
 	import { House, Bed, RockingChair } from '@lucide/svelte';
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { onMount } from 'svelte';
+
+	let tl: GSAPTimeline;
+	let container: HTMLElement;
 
 	const features: string[] = [
 		'Exclusive rental of the entire private chalet and all associated running costs',
@@ -58,20 +64,39 @@
 			dataLinks: true
 		}
 	];
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		gsap.set(container, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' });
+
+		if (!container) return;
+
+		tl = gsap.timeline().to(container, {
+			clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)',
+			ease: 'none',
+			scrollTrigger: {
+				trigger: container,
+				start: 'top top',
+				end: '+=700',
+				scrub: true
+			}
+		});
+	});
 </script>
 
 <main class="Home">
-	<picture class="Home__hero">
+	<picture class="Home__hero" bind:this={container}>
 		<source srcset="/assets/images/home/zinal-chalet.webp" media="(width >= 1024px)" />
 		<source srcset="/assets/images/home/zinal-chalet-tablet.webp" media="(width >= 768px)" />
-		<source srcset="https://placehold.co/400x600" media="(width >= 320px)" />
+		<source srcset="/assets/images/home/ski-lift.webp" media="(width >= 320px)" />
 		<img src="/assets/images/home/zinal-chalet.webp" alt="" />
 	</picture>
 
 	<div class="Home__sectionRow">
 		<div>
 			<h1 class="Home__title">Chalet Celidh Zinal</h1>
-			<p class="text-4xl italic">( pronounced kaylee )</p>
+			<p class="text-4xl text-pretty italic">( pronounced kaylee )</p>
 		</div>
 		<p>
 			Chalet Ceilidh is an outstanding luxury ski chalet and one of the few privately owned chalets
@@ -144,7 +169,6 @@
 		&__hero {
 			border-radius: 1rem;
 			height: 90vh;
-			overflow: hidden;
 			width: 100%;
 
 			source,
@@ -152,6 +176,7 @@
 				height: 100%;
 				object-fit: cover;
 				width: 100%;
+				border-radius: 1rem;
 			}
 		}
 

@@ -7,3 +7,8 @@ export type Cards = {
 	copy: string;
 	dataLinks?: boolean;
 };
+
+export interface UsefulLinksProps {
+	href: string;
+	text: string;
+}

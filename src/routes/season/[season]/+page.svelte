@@ -4,17 +4,13 @@
 	import Carousel from '$lib/components/ui/Carousel.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
 	import UsefulLinks from '$lib/components/ui/UsefulLinks.svelte';
+	import type { UsefulLinksProps } from '$lib/types';
 
 	let { data }: PageProps = $props();
 
 	const { title, pageDescription, carouselItems, features, slug, copy } = $derived(
 		data.pageContent
 	);
-
-	interface UsefulLinksProps {
-		href: string;
-		text: string;
-	}
 
 	const usefulLinks: UsefulLinksProps[] = [
 		{

@@ -3,7 +3,7 @@
 	import Card from '$lib/components/ui/Card.svelte';
 	import PageLayout from '$lib/components/PageLayout.svelte';
 	import CardWrapper from '$lib/components/ui/CardWrapper.svelte';
-	import type { Cards } from '$lib/types';
+	import type { Cards, UsefulLinksProps } from '$lib/types';
 
 	import { Plane, TrainFront, Car } from '@lucide/svelte';
 
@@ -24,6 +24,29 @@
 			copy: '<p>Approximate journey times by car:</p><ul><li>Sierre: 30mins</li><li>Sion: 45 mins</li><li>Geneva: 2h 15mins</li><li>Bern: 2h 15mins</li><li>Zurich: 3h 15mins</li><li>Calais: 8h 30mins</li></ul>'
 		}
 	];
+
+	const usefulLinks: UsefulLinksProps[] = [
+		{
+			href: 'https://www.sbb.ch/en',
+			text: 'www.rail.ch'
+		},
+		{
+			href: 'https://www.britishairways.com/travel/home/public/en_gb/',
+			text: 'www.ba.com'
+		},
+		{
+			href: 'https://www.easyjet.com/en/',
+			text: 'www.easyjet.com'
+		},
+		{
+			href: 'https://www.swiss.com/gb/en/homepage',
+			text: 'www.swiss.com'
+		},
+		{
+			href: 'https://www.viamichelin.com/',
+			text: 'Journey Planner'
+		}
+	];
 </script>
 
 <PageLayout title="Getting Here">
@@ -32,4 +55,6 @@
 	<CardWrapper>
 		<Card data={cards} />
 	</CardWrapper>
+
+	<UsefulLinks data={usefulLinks} />
 </PageLayout>
