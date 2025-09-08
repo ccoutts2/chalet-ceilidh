@@ -18,6 +18,7 @@
 
 	.PageLayout {
 		@include mixins.max-content($maxWidth: variables.$content--max-width--lg);
+		min-height: 100vh;
 		padding: 3rem 1rem;
 
 		@include breakpoints.tablet {

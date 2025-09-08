@@ -139,7 +139,7 @@
 		overflow: hidden;
 		padding: 1rem;
 		position: fixed;
-		z-index: 999000000;
+		z-index: 99999;
 
 		@include breakpoints.tablet {
 			padding-inline: 3rem;

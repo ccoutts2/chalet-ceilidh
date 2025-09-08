@@ -5,20 +5,15 @@
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import MenuOverlay from '$lib/components/navigation/MenuOverlay.svelte';
 	import { ChevronLeft } from '@lucide/svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Logo from '$lib/components/Logo.svelte';
 
 	let { children }: { children: Snippet } = $props();
 </script>
 
 <header class="Header">
 	<NavBar>
-		<div class="| Header__logo max-h-40 max-w-40 md:max-h-60 md:max-w-60">
-			<img
-				src="/assets/logos/chalet-ceilidh-logo.png"
-				alt="Logo displaying the text that chalet ceilidh is a luxury chalet in the Swiss Alps"
-				class="Header__image"
-			/>
-			<a href="/"><span class="visually-hidden">Navigate back home</span></a>
-		</div>
+		<Logo />
 
 		<ul class="Header__navList">
 			<li class="Header__navItem">
@@ -51,6 +46,8 @@
 
 {@render children()}
 
+<Footer />
+
 <style lang="scss">
 	@use '../lib/styles/partials/breakpoints';
 	@use '../lib/styles/partials/mixins';
@@ -58,22 +55,6 @@
 
 	.Header {
 		backdrop-filter: blur(12px);
-
-		&__logo {
-			position: relative;
-
-			a::after {
-				content: '';
-				inset: 0;
-				position: absolute;
-			}
-		}
-
-		&__image {
-			height: 100%;
-			object-fit: cover;
-			width: 100%;
-		}
 
 		&__navList {
 			display: none;
@@ -111,6 +92,7 @@
 				pointer-events: auto;
 				transform: translateY(0);
 				visibility: visible;
+				z-index: 100000;
 			}
 
 			.Header__dropdownLogo {
@@ -139,7 +121,7 @@
 			max-height 0.4s ease-out,
 			transform 0.3s ease-out;
 		visibility: hidden;
-		z-index: 1000;
+		z-index: 100000;
 
 		li {
 			padding: 0.5rem 0.25rem;
