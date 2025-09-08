@@ -12,9 +12,10 @@
 			</div>
 		</header>
 
-		<p>{item.copy}</p>
-
-		<a href={item.href}><span class="visually-hidden">Link to {item.title}</span></a>
+		<p>{@html item.copy}</p>
+		{#if item.dataLinks}
+			<a href={item.href}><span class="visually-hidden">Link to {item.title}</span></a>
+		{/if}
 	</article>
 {/each}
 
@@ -24,13 +25,14 @@
 
 	.Card {
 		@include mixins.flex($direction: column, $align: flex-start, $justify: space-between);
+		background-color: #e7e3de;
 		border-radius: 1rem;
-		position: relative;
 		grid-column-gap: 0.5rem;
 		grid-row-gap: 0.5rem;
 		padding: 1rem;
+		position: relative;
 		width: 100%;
-		background-color: #e7e3de;
+		width: 100%;
 
 		&__header {
 			@include mixins.flex($justify: space-between);

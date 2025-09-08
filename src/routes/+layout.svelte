@@ -11,12 +11,13 @@
 
 <header class="Header">
 	<NavBar>
-		<div class="max-h-40 max-w-40 md:max-h-60 md:max-w-60">
+		<div class="| Header__logo max-h-40 max-w-40 md:max-h-60 md:max-w-60">
 			<img
 				src="/assets/logos/chalet-ceilidh-logo.png"
 				alt="Logo displaying the text that chalet ceilidh is a luxury chalet in the Swiss Alps"
 				class="Header__image"
 			/>
+			<a href="/"><span class="visually-hidden">Navigate back home</span></a>
 		</div>
 
 		<ul class="Header__navList">
@@ -52,9 +53,21 @@
 
 <style lang="scss">
 	@use '../lib/styles/partials/breakpoints';
+	@use '../lib/styles/partials/mixins';
+	@use '../lib/styles/partials/variables';
 
 	.Header {
 		backdrop-filter: blur(12px);
+
+		&__logo {
+			position: relative;
+
+			a::after {
+				content: '';
+				inset: 0;
+				position: absolute;
+			}
+		}
 
 		&__image {
 			height: 100%;

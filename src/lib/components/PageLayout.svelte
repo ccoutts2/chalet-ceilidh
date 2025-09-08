@@ -13,8 +13,11 @@
 
 <style lang="scss">
 	@use '../styles/partials/breakpoints';
+	@use '../styles/partials/mixins';
+	@use '../styles/partials/variables';
 
 	.PageLayout {
+		@include mixins.max-content($maxWidth: variables.$content--max-width--lg);
 		padding: 3rem 1rem;
 
 		@include breakpoints.tablet {
