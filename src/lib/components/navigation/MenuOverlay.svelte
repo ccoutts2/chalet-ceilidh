@@ -13,11 +13,12 @@
 
 	const handleNavigation = (e: MouseEvent, href: string) => {
 		e.preventDefault();
-		toggleMenuOverlay();
 
-		setTimeout(() => {
-			goto(href);
-		}, 800);
+		if (!tl.reversed()) {
+			tl.reverse().then(() => {
+				goto(href);
+			});
+		}
 	};
 
 	const createMenuOverlayAnimation: Attachment = (container) => {
@@ -94,7 +95,7 @@
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
 						class="!text-4xl tracking-tight"
-						onclick={(e: MouseEvent) => handleNavigation(e, '/winter')}>Winter</NavLink
+						onclick={(e: MouseEvent) => handleNavigation(e, '/season/winter')}>Winter</NavLink
 					>
 				</div>
 			</li>
@@ -102,7 +103,7 @@
 				<div class="MenuOverlay__itemHolder">
 					<NavLink
 						class="!text-4xl tracking-tight"
-						onclick={(e: MouseEvent) => handleNavigation(e, '/summer')}>Summer</NavLink
+						onclick={(e: MouseEvent) => handleNavigation(e, '/season/summer')}>Summer</NavLink
 					>
 				</div>
 			</li>
