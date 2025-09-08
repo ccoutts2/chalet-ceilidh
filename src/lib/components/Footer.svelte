@@ -11,13 +11,13 @@
 				<h3>Explore</h3>
 				<nav>
 					<ul class="Footer__col">
-						<li><NavLink>Home</NavLink></li>
-						<li><NavLink>Layout</NavLink></li>
-						<li><NavLink>Living</NavLink></li>
-						<li><NavLink>Sleeping</NavLink></li>
-						<li><NavLink>Relaxing</NavLink></li>
-						<li><NavLink>Winter</NavLink></li>
-						<li><NavLink>Summer</NavLink></li>
+						<li><NavLink href="/">Home</NavLink></li>
+						<li><NavLink href="/layout">Layout</NavLink></li>
+						<li><NavLink href="/layout/living">Living</NavLink></li>
+						<li><NavLink href="/layout/sleeping">Sleeping</NavLink></li>
+						<li><NavLink href="/layout/relaxing">Relaxing</NavLink></li>
+						<li><NavLink href="/season/winter">Winter</NavLink></li>
+						<li><NavLink href="/season/summer">Summer</NavLink></li>
 					</ul>
 				</nav>
 			</section>
@@ -26,10 +26,10 @@
 				<h3>Chalet</h3>
 				<nav>
 					<ul class="Footer__col">
-						<li><NavLink>Getting Here</NavLink></li>
-						<li><NavLink>Contact</NavLink></li>
-						<li><NavLink>Booking Form</NavLink></li>
-						<li><NavLink>Terms & Conditions</NavLink></li>
+						<li><NavLink href="/getting-here">Getting Here</NavLink></li>
+						<li><NavLink href="/contact">Contact</NavLink></li>
+						<li><NavLink href="/">Booking Form</NavLink></li>
+						<li><NavLink href="/">Terms & Conditions</NavLink></li>
 					</ul>
 				</nav>
 			</section>
