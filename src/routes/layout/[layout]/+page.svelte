@@ -5,8 +5,9 @@
 	import Features from '$lib/components/ui/Features.svelte';
 	let { data }: PageProps = $props();
 
-	const { title, pageDescription, carouselItems, features, creatureComforts, copy } =
-		data.pageContent;
+	const { title, pageDescription, carouselItems, features, creatureComforts, copy } = $derived(
+		data.pageContent
+	);
 </script>
 
 <PageLayout title="Layout | {title}">
@@ -20,7 +21,7 @@
 	{#if creatureComforts?.length}
 		<Features data={creatureComforts} heading="Creature Comforts" />
 	{/if}
-	<div class="flex flex-col gap-4 py-8 md:py-12 lg:flex-row">
+	<div class="flex flex-col gap-4 py-8 md:py-12">
 		{#each copy as sentence}
 			<p>{sentence}</p>
 		{/each}

@@ -57,7 +57,6 @@
 		backdrop-filter: blur(12px);
 
 		&__image {
-			filter: invert(10%) sepia(7%) saturate(1269%) hue-rotate(185deg) brightness(88%) contrast(86%);
 			height: 100%;
 			object-fit: cover;
 			width: 100%;
@@ -108,6 +107,7 @@
 	}
 
 	.DropdownMenu {
+		background-color: #eee9e2;
 		display: flex;
 		flex-direction: column;
 		left: 0;
@@ -115,7 +115,7 @@
 		min-width: 8rem;
 		opacity: 0;
 		overflow: hidden;
-		padding: 0.5rem 0;
+		padding: 0.5rem;
 		pointer-events: none;
 		position: absolute;
 		top: 100%;

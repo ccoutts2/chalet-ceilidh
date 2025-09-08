@@ -132,33 +132,33 @@
 
 	.MenuOverlay {
 		@include mixins.flex($direction: column, $justify: flex-start);
-		background: #f0f8ff;
-		height: 100vh;
+		background-color: #eee9e2;
 		inset: 0;
+		min-height: 100vh;
 		opacity: 0;
 		overflow: hidden;
+		padding: 1rem;
 		position: fixed;
-		z-index: 9;
+		z-index: 999000000;
+
+		@include breakpoints.tablet {
+			padding-inline: 3rem;
+		}
 
 		@include breakpoints.desktop {
 			display: none;
 		}
 
 		&__button {
-			position: absolute;
-			right: 1rem;
-			top: 1rem;
+			@include mixins.flex($justify: flex-end);
+			width: 100%;
 			z-index: 999;
 		}
 
 		&__nav {
 			color: black;
 			height: 100vh;
-			left: 0;
-			padding: 1rem;
-			position: absolute;
-			top: 0;
-			width: 100vw;
+			width: 100%;
 			z-index: 10;
 		}
 

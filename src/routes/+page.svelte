@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Card from '$lib/components/ui/Card.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
+	import { House, Bed, RockingChair, type Icon as IconType } from '@lucide/svelte';
 
 	const features: string[] = [
 		'Exclusive rental of the entire private chalet and all associated running costs',
@@ -35,20 +36,28 @@
 	type Cards = {
 		title: string;
 		href: string;
+		icon: typeof IconType;
+		copy: string;
 	};
 
 	const cards: Cards[] = [
 		{
 			title: 'Living',
-			href: '/layout/living'
+			href: '/layout/living',
+			icon: House,
+			copy: 'We offer an amazing space'
 		},
 		{
 			title: 'Sleeping',
-			href: '/layout/sleeping'
+			href: '/layout/sleeping',
+			icon: Bed,
+			copy: 'We offer a place which sleeps up to 8'
 		},
 		{
 			title: 'Relaxing',
-			href: '/layout/relaxing'
+			href: '/layout/relaxing',
+			icon: RockingChair,
+			copy: 'No skiing? No problem. Relax in our space.'
 		}
 	];
 </script>
@@ -110,9 +119,10 @@
 			</aside>
 		</section>
 		<section class="Home__sectionRow">
-			{#each cards as card}
-				<Card data={card} />
-			{/each}
+			<h2 class="max-w-[50%]">See more of what we have to offer</h2>
+			<div class="Home__cards">
+				<Card data={cards} />
+			</div>
 		</section>
 	</div>
 </main>
@@ -146,13 +156,14 @@
 			@include breakpoints.desktop {
 				padding-inline: 5rem;
 			}
+		}
 
-			&__title {
-				font-size: clamp(2.5rem, 3vw, 4rem);
-			}
+		&__title {
+			font-size: clamp(2.5rem, 3vw, 4rem);
 		}
 
 		&__sectionRow {
+			background-color: #eee9e2;
 			display: flex;
 			justify-content: space-between;
 			padding-block: 3rem;
@@ -164,6 +175,17 @@
 			p {
 				flex: 1.125;
 			}
+		}
+
+		&__cards {
+			align-items: flex-start;
+			display: grid;
+			grid-auto-columns: 1fr;
+			grid-column-gap: 3rem;
+			grid-row-gap: 3rem;
+			grid-template-rows: auto;
+			justify-content: space-between;
+			position: relative;
 		}
 	}
 </style>

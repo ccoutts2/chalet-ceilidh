@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import gsap from 'gsap';
+	import { onMount } from 'svelte';
 	let { data } = $props();
 
 	let count: number = $state(0);
