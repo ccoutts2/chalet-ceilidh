@@ -97,7 +97,7 @@
 		&__link {
 			@include mixins.flex($align: center);
 			background-color: #f6f1eb;
-			border: 0.5px solid #403a34;
+			border: 1px solid #403a34;
 			color: #403a34;
 			flex: 1;
 			max-width: 12rem;
