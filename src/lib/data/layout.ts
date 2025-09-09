@@ -71,13 +71,13 @@ export const layoutPageData: Layout[] = [
 			'Individually designed bedrooms on the lower ground floor of Chalet Ceilidh. They all have glass doors leading to the garden and all have stunning views of the mountains',
 		carouselItems: [
 			{
-				src: '/assets/images/layout/living/swiss-ski-chalet-1.jpg',
-				caption: 'living area 1',
+				src: '/assets/images/layout/living/swiss-ski-chalet-2.jpg',
+				caption: 'living area 2',
 				alt: ''
 			},
 			{
-				src: '/assets/images/layout/living/swiss-ski-chalet-2.jpg',
-				caption: 'living area 2',
+				src: '/assets/images/layout/living/swiss-ski-chalet-1.jpg',
+				caption: 'living area 1',
 				alt: ''
 			},
 			{
@@ -117,8 +117,8 @@ export const layoutPageData: Layout[] = [
 			'For total relaxation enjoy the scent of eucalyptus or pine in the Finnish sauna. Soothe away the stresses and strains of a hard day on the slopes in the outdoor hot tub and admire the spectacular scenery or gaze at the stars come evening.',
 		carouselItems: [
 			{
-				src: '/assets/images/layout/living/swiss-ski-chalet-1.jpg',
-				caption: 'living area 1',
+				src: '/assets/images/layout/living/swiss-ski-chalet-3.jpg',
+				caption: 'living area 3',
 				alt: ''
 			},
 			{
@@ -127,8 +127,8 @@ export const layoutPageData: Layout[] = [
 				alt: ''
 			},
 			{
-				src: '/assets/images/layout/living/swiss-ski-chalet-3.jpg',
-				caption: 'living area 3',
+				src: '/assets/images/layout/living/swiss-ski-chalet-1.jpg',
+				caption: 'living area 1',
 				alt: ''
 			}
 		],

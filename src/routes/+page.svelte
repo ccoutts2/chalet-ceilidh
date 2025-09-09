@@ -8,6 +8,10 @@
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
 
+	let { data } = $props();
+
+	console.log(data);
+
 	let tl: GSAPTimeline;
 	let container: HTMLElement;
 
@@ -95,7 +99,7 @@
 
 	<div class="Home__sectionRow">
 		<div>
-			<h1 class="Home__title">Chalet Celidh Zinal</h1>
+			<h1 class="Home__title">Chalet Ceilidh Zinal</h1>
 			<p class="text-2xl text-pretty italic">( pronounced kaylee )</p>
 		</div>
 		<p>
@@ -143,8 +147,34 @@
 	<section class="Home__sectionRow">
 		<h2>See more of what we have to offer</h2>
 		<CardWrapper>
-			<Card data={cards} />
+			<Card data={cards} externalLink={false} />
 		</CardWrapper>
+	</section>
+
+	<section class="Home__sectionRow Layout" data-is-column>
+		<h2>See our layouts</h2>
+		<div class="Layout__container">
+			<nav class="Layout__nav">
+				<a class="Layout__link" href="/?layout=living" data-sveltekit-noscroll>Living</a>
+				<a class="Layout__link" href="/?layout=sleeping" data-sveltekit-noscroll>Sleeping</a>
+				<a class="Layout__link" href="/?layout=relaxing" data-sveltekit-noscroll>Relaxing</a>
+			</nav>
+			<div class="Layout__content">
+				{#if data.selectedLayout && data.selectedLayout.length}
+					{@const selectedLayout = data.selectedLayout[0]}
+
+					<div class="Layout__imageContainer">
+						<img src={selectedLayout.carouselItems[0].src} alt="placeholder" />
+					</div>
+
+					<section>
+						<h3>{selectedLayout.title}</h3>
+						<p>{selectedLayout.features}</p>
+						<p>{selectedLayout.pageDescription}</p>
+					</section>
+				{/if}
+			</div>
+		</div>
 	</section>
 </main>
 
@@ -174,10 +204,10 @@
 
 			source,
 			img {
+				border-radius: 1rem;
 				height: 100%;
 				object-fit: cover;
 				width: 100%;
-				border-radius: 1rem;
 			}
 		}
 
@@ -186,16 +216,21 @@
 		}
 
 		&__sectionRow {
+			@include mixins.flex($direction: column, $justify: space-between, $gap: 2rem);
 			background-color: #eee9e2;
-			display: flex;
-			gap: 2rem;
-			flex-direction: column;
-			justify-content: space-between;
 			padding-block: 2rem;
 
 			@include breakpoints.desktop {
 				flex-direction: row;
 				padding-block: 5rem;
+			}
+
+			&[data-is-column] {
+				@include breakpoints.desktop {
+					align-items: center;
+					flex-direction: column;
+					padding-block: 5rem;
+				}
 			}
 
 			div {
@@ -213,13 +248,100 @@
 			gap: 1.5rem;
 
 			@include breakpoints.desktop {
+				flex: 1.25;
+				height: 75vh;
+				line-height: 1.75rem;
+				max-width: 80ch;
+				padding-top: 3rem;
 				position: sticky;
 				top: 2rem;
-				height: 75vh;
-				max-width: 80ch;
-				flex: 1.25;
-				padding-top: 3rem;
-				line-height: 1.75rem;
+			}
+		}
+	}
+
+	.Layout {
+		display: flex;
+		flex-direction: column;
+
+		&__container {
+			display: flex;
+			flex-direction: column;
+			gap: 2rem;
+
+			@include breakpoints.tablet {
+				flex-direction: row;
+				justify-content: space-between;
+				display: grid;
+				grid-template-columns: repeat(12, 1fr);
+				column-gap: 1rem;
+				row-gap: 1rem;
+			}
+		}
+
+		&__nav {
+			display: flex;
+			flex-wrap: wrap;
+			grid-column-start: 1;
+			grid-column-end: 4;
+			justify-content: center;
+			gap: 2rem;
+
+			@include breakpoints.tablet {
+				flex-direction: column;
+				flex-wrap: nowrap;
+				justify-content: flex-start;
+			}
+		}
+
+		&__link {
+			@include mixins.flex($align: center);
+			background-color: #403a34;
+			border: 0.5px solid #403a34;
+			color: #eee9e2;
+			padding: 2rem;
+			text-transform: uppercase;
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				background-color: #eee9e2;
+				color: #403a34;
+				transform: scaleY(0);
+				transform-origin: top;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: transform 0.55s cubic-bezier(0, 1.09, 0.83, 1);
+			}
+
+			&:hover {
+				&::after {
+					transform: scaleY(1);
+					content: 'View';
+				}
+			}
+		}
+
+		&__content {
+			@include breakpoints.mobile {
+				display: grid;
+				grid-column-start: 5;
+				grid-column-end: 13;
+				grid-template-columns: repeat(2, 1fr);
+				gap: 2rem;
+			}
+		}
+
+		&__imageContainer {
+			max-width: 40rem;
+			height: 30rem;
+
+			img {
+				height: 100%;
+				object-fit: cover;
+				width: 100%;
 			}
 		}
 	}

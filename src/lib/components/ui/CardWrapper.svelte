@@ -1,23 +1,31 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	let { children }: { children: Snippet } = $props();
+	interface CardWrapper {
+		children: Snippet;
+		layout?: 'vertical' | 'horizontal';
+	}
+
+	let { children, layout = 'vertical' }: CardWrapper = $props();
 </script>
 
-<div class="CardWrapper">
+<div class="CardWrapper" data-layout={layout}>
 	{@render children?.()}
 </div>
 
 <style>
 	.CardWrapper {
-		align-items: flex-start;
-		display: grid;
-		grid-auto-columns: 1fr;
-		grid-column-gap: 3rem;
-		grid-row-gap: 3rem;
-		grid-template-rows: auto;
-		justify-content: space-between;
 		position: relative;
 		width: 100%;
+	}
+
+	.CardWrapper[data-layout='vertical'] :global(ul:first-child) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.CardWrapper[data-layout='horizontal'] :global(ul:first-child) {
+		display: flex;
+		flex-direction: row;
 	}
 </style>
