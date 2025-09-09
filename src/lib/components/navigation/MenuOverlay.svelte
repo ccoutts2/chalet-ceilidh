@@ -133,7 +133,7 @@
 
 	.MenuOverlay {
 		@include mixins.flex($direction: column, $justify: flex-start);
-		background-color: #eee9e2;
+		background-color: #f6f1eb;
 		inset: 0;
 		min-height: 100vh;
 		opacity: 0;

@@ -52,8 +52,8 @@
 	@use '../styles/partials/mixins';
 
 	.Footer {
-		padding: 1rem;
 		border-radius: 1rem;
+		padding: 1rem;
 
 		@include breakpoints.tablet {
 			padding: 2rem;
@@ -61,8 +61,10 @@
 
 		&__container {
 			@include mixins.flex($direction: column, $align: center, $gap: 2rem);
-			background-color: #e7e3de;
+			background-color: #403a34;
 			border-radius: 1rem;
+			color: #f6f1eb;
+			font-family: ClashGrotesk-Light;
 			padding: 1rem;
 
 			h3 {

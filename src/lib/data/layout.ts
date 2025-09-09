@@ -4,7 +4,7 @@ interface CarouselSlides {
 	alt: string;
 }
 
-interface Layout {
+export interface Layout {
 	slug: string;
 	title: string;
 	pageDescription: string;

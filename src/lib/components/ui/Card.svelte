@@ -76,8 +76,10 @@
 
 	.Card {
 		@include mixins.flex($direction: column, $align: flex-start, $justify: space-between);
-		background-color: #e7e3de;
+		background-color: #403a34;
 		border-radius: 1rem;
+		color: #f6f1eb;
+		font-family: ClashGrotesk-Light;
 		grid-column-gap: 0.5rem;
 		grid-row-gap: 0.5rem;
 		padding: 1rem;
@@ -86,6 +88,7 @@
 
 		&__header {
 			@include mixins.flex($justify: space-between);
+			font-family: ClashGrotesk-Regular;
 			width: 100%;
 		}
 

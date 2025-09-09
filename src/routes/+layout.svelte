@@ -54,7 +54,7 @@
 	@use '../lib/styles/partials/variables';
 
 	.Header {
-		background-color: #eee9e2;
+		background-color: #f6f1eb;
 		position: fixed;
 		top: 0;
 		width: 100%;
@@ -106,7 +106,6 @@
 	}
 
 	.DropdownMenu {
-		background-color: #eee9e2;
 		display: flex;
 		flex-direction: column;
 		left: 0;
@@ -129,10 +128,11 @@
 		li {
 			padding: 0.5rem 0.25rem;
 			width: 100%;
+			transition: all 0.3s;
 
 			&:hover {
-				background-color: #f0f0f0;
-				border-radius: 1rem;
+				background-color: #403a34;
+				color: #f6f1eb;
 			}
 		}
 	}

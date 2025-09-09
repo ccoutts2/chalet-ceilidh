@@ -1,16 +1,15 @@
 <script lang="ts">
+	import LayoutSpace from '$lib/components/LayoutSpace.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import CardWrapper from '$lib/components/ui/CardWrapper.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
 	import type { Cards } from '$lib/types';
-	import { House, Bed, RockingChair } from '@lucide/svelte';
+	import { Snowflake, Sun } from '@lucide/svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { onMount } from 'svelte';
 
 	let { data } = $props();
-
-	console.log(data);
 
 	let tl: GSAPTimeline;
 	let container: HTMLElement;
@@ -47,24 +46,17 @@
 
 	const cards: Cards[] = [
 		{
-			title: 'Living',
-			href: '/layout/living',
-			icon: House,
-			copy: '<p>We offer an amazing space.</p>',
+			title: 'Winter',
+			href: '/season/winter',
+			icon: Snowflake,
+			copy: '<p>Check out what you can get up to during winter.</p>',
 			dataLinks: true
 		},
 		{
-			title: 'Sleeping',
-			href: '/layout/sleeping',
-			icon: Bed,
-			copy: '<p>We offer a place which sleeps up to 8.</p>',
-			dataLinks: true
-		},
-		{
-			title: 'Relaxing',
-			href: '/layout/relaxing',
-			icon: RockingChair,
-			copy: '<p>No skiing? No problem. Relax in our space.<p>',
+			title: 'Summer',
+			href: '/season/summer',
+			icon: Sun,
+			copy: '<p>Check out what you can get up to during summer.</p>',
 			dataLinks: true
 		}
 	];
@@ -144,37 +136,16 @@
 			<Features data={creatureComforts} heading="Creature Comforts" />
 		</aside>
 	</section>
+
+	<section class="Home__sectionRow Layout" data-is-column>
+		<LayoutSpace data={data.selectedLayout} />
+	</section>
+
 	<section class="Home__sectionRow">
 		<h2>See more of what we have to offer</h2>
 		<CardWrapper>
 			<Card data={cards} externalLink={false} />
 		</CardWrapper>
-	</section>
-
-	<section class="Home__sectionRow Layout" data-is-column>
-		<h2>See our layouts</h2>
-		<div class="Layout__container">
-			<nav class="Layout__nav">
-				<a class="Layout__link" href="/?layout=living" data-sveltekit-noscroll>Living</a>
-				<a class="Layout__link" href="/?layout=sleeping" data-sveltekit-noscroll>Sleeping</a>
-				<a class="Layout__link" href="/?layout=relaxing" data-sveltekit-noscroll>Relaxing</a>
-			</nav>
-			<div class="Layout__content">
-				{#if data.selectedLayout && data.selectedLayout.length}
-					{@const selectedLayout = data.selectedLayout[0]}
-
-					<div class="Layout__imageContainer">
-						<img src={selectedLayout.carouselItems[0].src} alt="placeholder" />
-					</div>
-
-					<section>
-						<h3>{selectedLayout.title}</h3>
-						<p>{selectedLayout.features}</p>
-						<p>{selectedLayout.pageDescription}</p>
-					</section>
-				{/if}
-			</div>
-		</div>
 	</section>
 </main>
 
@@ -217,7 +188,7 @@
 
 		&__sectionRow {
 			@include mixins.flex($direction: column, $justify: space-between, $gap: 2rem);
-			background-color: #eee9e2;
+			background-color: #f6f1eb;
 			padding-block: 2rem;
 
 			@include breakpoints.desktop {
@@ -255,93 +226,6 @@
 				padding-top: 3rem;
 				position: sticky;
 				top: 2rem;
-			}
-		}
-	}
-
-	.Layout {
-		display: flex;
-		flex-direction: column;
-
-		&__container {
-			display: flex;
-			flex-direction: column;
-			gap: 2rem;
-
-			@include breakpoints.tablet {
-				flex-direction: row;
-				justify-content: space-between;
-				display: grid;
-				grid-template-columns: repeat(12, 1fr);
-				column-gap: 1rem;
-				row-gap: 1rem;
-			}
-		}
-
-		&__nav {
-			display: flex;
-			flex-wrap: wrap;
-			grid-column-start: 1;
-			grid-column-end: 4;
-			justify-content: center;
-			gap: 2rem;
-
-			@include breakpoints.tablet {
-				flex-direction: column;
-				flex-wrap: nowrap;
-				justify-content: flex-start;
-			}
-		}
-
-		&__link {
-			@include mixins.flex($align: center);
-			background-color: #403a34;
-			border: 0.5px solid #403a34;
-			color: #eee9e2;
-			padding: 2rem;
-			text-transform: uppercase;
-			position: relative;
-
-			&::after {
-				content: '';
-				position: absolute;
-				inset: 0;
-				background-color: #eee9e2;
-				color: #403a34;
-				transform: scaleY(0);
-				transform-origin: top;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				transition: transform 0.55s cubic-bezier(0, 1.09, 0.83, 1);
-			}
-
-			&:hover {
-				&::after {
-					transform: scaleY(1);
-					content: 'View';
-				}
-			}
-		}
-
-		&__content {
-			@include breakpoints.mobile {
-				display: grid;
-				grid-column-start: 5;
-				grid-column-end: 13;
-				grid-template-columns: repeat(2, 1fr);
-				gap: 2rem;
-			}
-		}
-
-		&__imageContainer {
-			max-width: 40rem;
-			height: 30rem;
-
-			img {
-				height: 100%;
-				object-fit: cover;
-				width: 100%;
 			}
 		}
 	}
