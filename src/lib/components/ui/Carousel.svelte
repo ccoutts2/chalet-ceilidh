@@ -94,71 +94,69 @@
 
 	.Carousel {
 		height: 85vh;
-		width: 100%;
-		position: relative;
 		pointer-events: none;
+		position: relative;
+		width: 100%;
 
 		&__wrapper {
-			position: relative;
 			height: 100%;
 			overflow: hidden;
+			position: relative;
 		}
 
 		&__slide {
-			position: absolute;
-			width: 100%;
+			-ms-flex-direction: column;
+			-webkit-box-direction: normal;
+			-webkit-box-orient: vertical;
+			display: -ms-flexbox;
+			display: -webkit-box;
+			display: flex;
+			flex-direction: column;
 			height: 100%;
 			left: 0;
-			top: 0;
-			display: -webkit-box;
-			display: -ms-flexbox;
-			display: flex;
-			-webkit-box-orient: vertical;
-			-webkit-box-direction: normal;
-			-ms-flex-direction: column;
-			flex-direction: column;
 			overflow: hidden;
+			position: absolute;
+			top: 0;
+			width: 100%;
 		}
 
 		&__imageContainer {
 			cursor: pointer;
-			-webkit-box-flex: 2;
 			-ms-flex-positive: 2;
-			flex-grow: 2;
-			width: 100%;
-			height: 100%;
-			display: -webkit-box;
+			-webkit-box-flex: 2;
 			display: -ms-flexbox;
+			display: -webkit-box;
 			display: flex;
+			flex-grow: 2;
 			height: 100%;
-			width: 100%;
 			position: relative;
+			width: 100%;
 		}
 
 		&__image {
-			height: 100%;
-			width: 100%;
 			-o-object-fit: cover;
-			object-fit: cover;
 			-o-object-position: center;
+			height: 100%;
+			left: 0;
+			object-fit: cover;
 			object-position: center;
 			position: absolute;
 			top: 0;
-			left: 0;
+			width: 100%;
 		}
 
 		&__caption {
-			display: flex;
-			-webkit-box-pack: justify;
-			-ms-flex-pack: justify;
-			justify-content: space-between;
-			-webkit-box-align: end;
 			-ms-flex-align: end;
+			-ms-flex-pack: justify;
+			-webkit-box-align: end;
+			-webkit-box-pack: justify;
 			align-items: flex-end;
-			pointer-events: auto;
-			overflow: hidden;
+			display: flex;
+			justify-content: space-between;
 			line-height: 1;
 			margin-block: 1rem;
+			overflow: hidden;
+			pointer-events: auto;
 		}
 	}
 
@@ -169,12 +167,12 @@
 		-webkit-box-direction: normal;
 		-webkit-box-orient: vertical;
 		align-items: center;
+		bottom: 3rem;
 		display: flex;
 		flex-direction: column;
 		pointer-events: none;
 		position: absolute;
 		right: 1rem;
-		bottom: 3rem;
 
 		@include breakpoints.tablet {
 			-webkit-transform: translateY(-50%);
@@ -184,26 +182,26 @@
 
 		&__index,
 		&__length {
+			color: #fff;
 			font-size: 1.125rem;
 			line-height: 1.7;
-			color: #fff;
 		}
 
 		&__time {
-			height: 1px;
-			width: 113px;
 			background-color: #fff;
-			position: relative;
 			display: flex;
+			height: 1px;
+			position: relative;
+			width: 113px;
 		}
 
 		&__timeSlider {
-			height: 3px;
-			width: 100%;
-			position: absolute;
-			top: 0;
-			left: 0;
 			background-color: white;
+			height: 3px;
+			left: 0;
+			position: absolute;
+			top: -0.75px;
+			width: 100%;
 		}
 	}
 </style>
