@@ -106,6 +106,7 @@
 	}
 
 	.DropdownMenu {
+		background-color: #f6f1eb;
 		display: flex;
 		flex-direction: column;
 		left: 0;

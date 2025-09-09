@@ -1,67 +1,70 @@
 <script lang="ts">
 	import type { Attachment } from 'svelte/attachments';
 	import gsap from 'gsap';
+	import { onDestroy } from 'svelte';
 	let { data } = $props();
 
 	let count: number = $state(0);
+	let progressBar: HTMLElement;
+	let interval: ReturnType<typeof setInterval>;
 
 	const createCarouselAnimation: Attachment = (container) => {
-		const images = container.querySelectorAll('.Carousel__image');
-		const numImages = images.length;
-
-		if (numImages === 0) return;
-
-		const wrapper = container.querySelector('.Carousel__wrapper');
-		const firstSlide = wrapper?.querySelector('.Carousel__slide')?.cloneNode(true);
-		if (firstSlide) wrapper?.appendChild(firstSlide);
-
 		const slides = container.querySelectorAll('.Carousel__image');
-		const totalSlides = slides.length;
+		const captions = container.querySelectorAll('.Carousel__captionText');
 
 		slides.forEach((img, i) => {
 			gsap.set(img, {
-				clipPath: i === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
-				zIndex: i === 0 ? totalSlides : 0
+				xPercent: i === 0 ? 0 : 100
 			});
 		});
 
-		const timeline = gsap.timeline({
+		captions.forEach((caption, i) => [
+			gsap.set(caption, {
+				yPercent: i === 0 ? 0 : 100
+			})
+		]);
+
+		gsap.set(progressBar, {
+			scaleX: 0
+		});
+
+		interval = setInterval(autoPlay, 5000);
+
+		gsap.to(progressBar, {
+			scaleX: 1,
+			delay: 1,
+			duration: 5,
+			ease: 'none',
 			repeat: -1,
-			onRepeat: () => {
-				slides.forEach((img, i) => {
-					gsap.set(img, {
-						clipPath: i === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
-						zIndex: i === 0 ? totalSlides : 0
-					});
-				});
-				timeline.pause();
-				requestAnimationFrame(() => timeline.play(0));
-			}
+			transformOrigin: 'left'
 		});
 
-		for (let i = 0; i < totalSlides - 1; i++) {
-			const current = slides[i];
-			const next = slides[i + 1];
+		function autoPlay() {
+			const current = count;
+			const next = (count + 1) % slides.length;
 
-			const step = gsap.timeline();
+			gsap.to(slides[current], { duration: 2, ease: 'power4.inOut', xPercent: -100 });
+			gsap.to(captions[current], { duration: 1, ease: 'power4.inOut', yPercent: 100 });
 
-			step.set(next, {
-				clipPath: 'inset(0% 100% 0% 0%)',
-				zIndex: totalSlides
-			});
+			gsap.fromTo(
+				slides[next],
+				{ xPercent: 100 },
+				{ duration: 2, ease: 'power4.inOut', xPercent: 0 }
+			);
 
-			step.to(next, {
-				clipPath: 'inset(0% 0% 0% 0%)',
-				duration: 3.5,
-				ease: 'power4.inOut'
-			});
+			gsap.fromTo(
+				captions[next],
+				{ yPercent: 100 },
+				{ delay: 1, duration: 1, ease: 'power4.inOut', yPercent: 0 }
+			);
 
-			step.set(current, { zIndex: 0 });
-			step.to({}, { duration: 3 });
-
-			timeline.add(step);
+			count = next;
 		}
 	};
+
+	onDestroy(() => {
+		clearInterval(interval);
+	});
 </script>
 
 <div class="Carousel" {@attach createCarouselAnimation}>
@@ -79,7 +82,7 @@
 		<div class="ProgressBar">
 			<span class="ProgressBar__index">{count + 1}</span>
 			<span class="ProgressBar__time">
-				<span class="ProgressBar__timeSlider"></span>
+				<span class="ProgressBar__timeSlider" bind:this={progressBar}></span>
 			</span>
 			<span class="ProgressBar__length">{data.length}</span>
 		</div>
@@ -87,10 +90,13 @@
 </div>
 
 <style lang="scss">
+	@use '../../styles/partials/breakpoints';
+
 	.Carousel {
-		height: 100vh;
+		height: 85vh;
 		width: 100%;
 		position: relative;
+		pointer-events: none;
 
 		&__wrapper {
 			position: relative;
@@ -115,6 +121,7 @@
 		}
 
 		&__imageContainer {
+			cursor: pointer;
 			-webkit-box-flex: 2;
 			-ms-flex-positive: 2;
 			flex-grow: 2;
@@ -123,7 +130,6 @@
 			display: -webkit-box;
 			display: -ms-flexbox;
 			display: flex;
-			cursor: pointer;
 			height: 100%;
 			width: 100%;
 			position: relative;
@@ -157,21 +163,24 @@
 	}
 
 	.ProgressBar {
-		right: 20px;
-		top: 50%;
-		bottom: auto;
-		-webkit-transform: translateY(-50%);
-		transform: translateY(-50%);
-		-webkit-box-orient: vertical;
-		-webkit-box-direction: normal;
-		-ms-flex-direction: column;
-		flex-direction: column;
-		position: absolute;
-		-webkit-box-align: center;
 		-ms-flex-align: center;
+		-ms-flex-direction: column;
+		-webkit-box-align: center;
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
 		align-items: center;
-		pointer-events: none;
 		display: flex;
+		flex-direction: column;
+		pointer-events: none;
+		position: absolute;
+		right: 1rem;
+		bottom: 3rem;
+
+		@include breakpoints.tablet {
+			-webkit-transform: translateY(-50%);
+			top: 50%;
+			transform: translateY(-50%);
+		}
 
 		&__index,
 		&__length {
