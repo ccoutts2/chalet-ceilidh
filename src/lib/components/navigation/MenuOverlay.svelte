@@ -4,6 +4,7 @@
 	import type { Attachment } from 'svelte/attachments';
 
 	import NavLink from './NavLink.svelte';
+	import Logo from '../Logo.svelte';
 
 	let tl: GSAPTimeline;
 
@@ -55,8 +56,11 @@
 </div>
 
 <div class="MenuOverlay" {@attach createMenuOverlayAnimation}>
-	<div class="MenuOverlay__button">
-		<button onclick={toggleMenuOverlay}>Close</button>
+	<div class="flex justify-between align-top">
+		<Logo />
+		<div class="MenuOverlay__button">
+			<button onclick={toggleMenuOverlay}>Close</button>
+		</div>
 	</div>
 	<nav class="MenuOverlay__nav">
 		<ul class="MenuOverlay__list">
@@ -152,12 +156,10 @@
 
 		&__button {
 			@include mixins.flex($justify: flex-end);
-			width: 100%;
 			z-index: 999;
 		}
 
 		&__nav {
-			color: black;
 			height: 100vh;
 			width: 100%;
 			z-index: 10;
@@ -171,7 +173,7 @@
 		&__item {
 			cursor: pointer;
 			border-bottom: 1px solid black;
-			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+			clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
 			overflow: hidden;
 			position: relative;
 			width: 100%;

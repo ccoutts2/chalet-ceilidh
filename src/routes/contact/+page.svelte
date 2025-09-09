@@ -47,10 +47,35 @@
 </script>
 
 <PageLayout title="Contact">
-	<p>For up to date availability, please contact:</p>
-	<p>Fiona Heritage</p>
+	<div class="py-8">
+		<p>For up to date availability, please contact:</p>
+		<p class="text-xl">Fiona Heritage</p>
+	</div>
 
-	<CardWrapper layout="horizontal">
-		<Card data={contactDetails} externalLink={true} />
-	</CardWrapper>
+	<div class="lg:invisible lg:hidden lg:opacity-0">
+		<CardWrapper layout="vertical">
+			<Card data={contactDetails} externalLink={true} />
+		</CardWrapper>
+	</div>
+
+	<div class="invisible hidden opacity-0 lg:visible lg:flex lg:opacity-100">
+		<CardWrapper layout="horizontal">
+			<Card data={contactDetails} externalLink={true} />
+		</CardWrapper>
+	</div>
+
+	<div class="flex flex-col gap-4 pt-8">
+		<p>
+			The prices are for exclusive occupancy of Chalet Ceilidh for seven nights and includes bath
+			linen and beds made on arrival, complimentary toiletries and concierge services available
+			prior to and during your stay.
+		</p>
+		<p>
+			Your reservation will only be confirmed after receipt of your signed booking form and deposit.
+		</p>
+		<p>
+			The final balance is due 8 weeks before your holiday. Payment can only be made by bank
+			transfer.
+		</p>
+	</div>
 </PageLayout>

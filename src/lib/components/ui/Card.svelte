@@ -66,10 +66,12 @@
 		grid-column-gap: 3rem;
 		grid-row-gap: 3rem;
 		grid-template-rows: auto;
+		height: 100%;
 		justify-content: space-between;
 		width: 100%;
 
 		li {
+			height: 100%;
 			width: 100%;
 		}
 	}
@@ -82,6 +84,7 @@
 		font-family: ClashGrotesk-Light;
 		grid-column-gap: 0.5rem;
 		grid-row-gap: 0.5rem;
+		height: 100%;
 		padding: 1rem;
 		position: relative;
 		width: 100%;
