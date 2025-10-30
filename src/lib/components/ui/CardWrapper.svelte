@@ -22,6 +22,8 @@
 	.CardWrapper[data-layout='vertical'] :global(ul:first-child) {
 		display: flex;
 		flex-direction: column;
+		min-width: 40rem;
+		max-width: fit-content;
 	}
 
 	.CardWrapper[data-layout='horizontal'] :global(ul:first-child) {

@@ -1,5 +1,7 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import type { EmblaOptionsType } from 'embla-carousel';
+	import { page } from '$app/state';
 	import PageLayout from '$lib/components/PageLayout.svelte';
 	import Carousel from '$lib/components/ui/Carousel.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
@@ -8,13 +10,19 @@
 	const { title, pageDescription, carouselItems, features, creatureComforts, copy } = $derived(
 		data.pageContent
 	);
+
+	const options: EmblaOptionsType = { loop: true, duration: 40 };
 </script>
 
 <PageLayout title="Layout | {title}">
 	<div class="py-8 md:py-12">
 		<p>{pageDescription}</p>
 	</div>
-	<Carousel data={carouselItems} />
+
+	{#key page.url.pathname}
+		<Carousel slides={carouselItems} {options} />
+	{/key}
+
 	{#if features.length}
 		<Features data={features} heading="Features" />
 	{/if}

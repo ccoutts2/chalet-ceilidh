@@ -1,90 +1,93 @@
 <script lang="ts">
-	import type { Attachment } from 'svelte/attachments';
-	import gsap from 'gsap';
-	import { onDestroy } from 'svelte';
-	let { data } = $props();
+	import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel';
+	import emblaCarouselSvelte from 'embla-carousel-svelte';
+	import Autoplay from 'embla-carousel-autoplay';
+	import ClassNames from 'embla-carousel-class-names';
 
-	let count: number = $state(0);
-	let progressBar: HTMLElement;
-	let interval: ReturnType<typeof setInterval>;
+	interface CarouselProps {
+		slides: any;
+		options?: EmblaOptionsType;
+	}
 
-	const createCarouselAnimation: Attachment = (container) => {
-		const slides = container.querySelectorAll('.Carousel__image');
-		const captions = container.querySelectorAll('.Carousel__captionText');
+	let { slides, options = {} }: CarouselProps = $props();
 
-		slides.forEach((img, i) => {
-			gsap.set(img, {
-				xPercent: i === 0 ? 0 : 100
+	let scrollProgress: number = $state(0);
+	let animationName: string = '';
+	let timeoutId = 0;
+	let rafId = 0;
+
+	let progressNode: HTMLDivElement;
+
+	let emblaApi: EmblaCarouselType | undefined = $state(undefined);
+
+	let plugins = [
+		Autoplay({
+			delay: 6000,
+			stopOnInteraction: false,
+			stopOnMouseEnter: false
+		}),
+		ClassNames()
+	];
+
+	function onInit(event: CustomEvent<EmblaCarouselType>) {
+		emblaApi = event.detail;
+		if (!emblaApi) return;
+		startProgress(emblaApi);
+	}
+
+	function startProgress(emblaApi: EmblaCarouselType) {
+		const autoplay = emblaApi?.plugins()?.autoplay;
+		if (!autoplay || !progressNode) return;
+
+		const restartProgress = () => {
+			const timeUntilNext = autoplay.timeUntilNext();
+			if (timeUntilNext === null) return;
+
+			if (!animationName) {
+				const style = window.getComputedStyle(progressNode);
+				animationName = style.animationName;
+			}
+
+			progressNode.style.animationName = 'none';
+			progressNode.style.transform = 'translate3d(0,0,0)';
+
+			cancelAnimationFrame(rafId);
+			clearTimeout(timeoutId);
+
+			rafId = requestAnimationFrame(() => {
+				timeoutId = setTimeout(() => {
+					progressNode.style.animationName = animationName;
+					progressNode.style.animationDuration = `${timeUntilNext}ms`;
+				}, 0);
 			});
-		});
+		};
 
-		captions.forEach((caption, i) => [
-			gsap.set(caption, {
-				yPercent: i === 0 ? 0 : 100
-			})
-		]);
+		restartProgress();
 
-		gsap.set(progressBar, {
-			scaleX: 0
-		});
-
-		interval = setInterval(autoPlay, 5000);
-
-		gsap.to(progressBar, {
-			scaleX: 1,
-			delay: 1,
-			duration: 5,
-			ease: 'none',
-			repeat: -1,
-			transformOrigin: 'left'
-		});
-
-		function autoPlay() {
-			const current = count;
-			const next = (count + 1) % slides.length;
-
-			gsap.to(slides[current], { duration: 2, ease: 'power4.inOut', xPercent: -100 });
-			gsap.to(captions[current], { duration: 1, ease: 'power4.inOut', yPercent: 100 });
-
-			gsap.fromTo(
-				slides[next],
-				{ xPercent: 100 },
-				{ duration: 2, ease: 'power4.inOut', xPercent: 0 }
-			);
-
-			gsap.fromTo(
-				captions[next],
-				{ yPercent: 100 },
-				{ delay: 1, duration: 1, ease: 'power4.inOut', yPercent: 0 }
-			);
-
-			count = next;
-		}
-	};
-
-	onDestroy(() => {
-		clearInterval(interval);
-	});
+		emblaApi.on('autoplay:timerset', restartProgress);
+	}
 </script>
 
-<div class="Carousel" {@attach createCarouselAnimation}>
-	<div class="Carousel__wrapper">
-		{#each data as slide}
-			<article class="Carousel__slide">
-				<div class="Carousel__imageContainer">
-					<img class="Carousel__image" src={slide.src} alt={slide.alt} />
+<div class="embla">
+	<div class="embla__viewport" use:emblaCarouselSvelte={{ options, plugins }} onemblaInit={onInit}>
+		<div class="embla__container">
+			{#each slides as slide}
+				<div class="embla__slide">
+					<div class="embla__parallax__layer">
+						<img class="embla__slide__img embla__parallax__img" src={slide.src} alt={slide.alt} />
+					</div>
+					<div class="embla__slide__caption">
+						<p class="embla__slide__text">{slide.caption}</p>
+					</div>
 				</div>
-				<div class="Carousel__caption">
-					<h3 class="Carousel__captionText">{slide.caption}</h3>
-				</div>
-			</article>
-		{/each}
-		<div class="ProgressBar">
-			<span class="ProgressBar__index">{count + 1}</span>
-			<span class="ProgressBar__time">
-				<span class="ProgressBar__timeSlider" bind:this={progressBar}></span>
-			</span>
-			<span class="ProgressBar__length">{data.length}</span>
+			{/each}
+		</div>
+		<div class="embla__progress">
+			<div
+				bind:this={progressNode}
+				class="embla__progress__bar"
+				style="transform: translate3d({scrollProgress}%,0px,0px)"
+			></div>
 		</div>
 	</div>
 </div>
@@ -92,116 +95,116 @@
 <style lang="scss">
 	@use '../../styles/partials/breakpoints';
 
-	.Carousel {
-		height: 85vh;
-		pointer-events: none;
-		position: relative;
-		width: 100%;
+	.embla {
+		max-width: 100vw;
+		margin: auto;
+		--slide-height: 35rem;
+		--slide-spacing: 2rem;
+		--slide-size: 100%;
+	}
+	.embla__viewport {
+		overflow: hidden;
+	}
+	.embla__container {
+		cursor: grab;
+		display: flex;
+		margin-left: calc(var(--slide-spacing) * -1);
+		touch-action: pan-y pinch-zoom;
 
-		&__wrapper {
-			height: 100%;
-			overflow: hidden;
-			position: relative;
-		}
-
-		&__slide {
-			-ms-flex-direction: column;
-			-webkit-box-direction: normal;
-			-webkit-box-orient: vertical;
-			display: -ms-flexbox;
-			display: -webkit-box;
-			display: flex;
-			flex-direction: column;
-			height: 100%;
-			left: 0;
-			overflow: hidden;
-			position: absolute;
-			top: 0;
-			width: 100%;
-		}
-
-		&__imageContainer {
-			cursor: pointer;
-			-ms-flex-positive: 2;
-			-webkit-box-flex: 2;
-			display: -ms-flexbox;
-			display: -webkit-box;
-			display: flex;
-			flex-grow: 2;
-			height: 100%;
-			position: relative;
-			width: 100%;
-		}
-
-		&__image {
-			-o-object-fit: cover;
-			-o-object-position: center;
-			height: 100%;
-			left: 0;
-			object-fit: cover;
-			object-position: center;
-			position: absolute;
-			top: 0;
-			width: 100%;
-		}
-
-		&__caption {
-			-ms-flex-align: end;
-			-ms-flex-pack: justify;
-			-webkit-box-align: end;
-			-webkit-box-pack: justify;
-			align-items: flex-end;
-			display: flex;
-			justify-content: space-between;
-			line-height: 1;
-			margin-block: 1rem;
-			overflow: hidden;
-			pointer-events: auto;
+		:active {
+			cursor: grabbing;
 		}
 	}
+	.embla__slide {
+		flex: 0 0 var(--slide-size);
+		min-width: 0;
+		padding-left: var(--slide-spacing);
+		transform: translate3d(0, 0, 0);
+	}
+	.embla__slide__img {
+		display: block;
+		height: var(--slide-height);
+		object-fit: cover;
+		width: 100%;
+		object-fit: cover;
+		transform: scale(1);
+		transition: transform 2s cubic-bezier(1, 0.15, 0.46, 0.95);
+		transition-delay: 0.4s;
+	}
 
-	.ProgressBar {
-		-ms-flex-align: center;
-		-ms-flex-direction: column;
-		-webkit-box-align: center;
-		-webkit-box-direction: normal;
-		-webkit-box-orient: vertical;
-		align-items: center;
-		bottom: 3rem;
-		display: flex;
-		flex-direction: column;
+	.embla__slide:not(.is-snapped) .embla__slide__img {
+		transform: scale(1.1);
+	}
+
+	.embla__slide__caption {
+		bottom: 0.25rem;
+		text-align: left;
+		color: black;
+		font-size: 2rem;
+		text-transform: uppercase;
 		pointer-events: none;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.embla__slide__text {
+		transform: translateY(0%);
+		transition: transform 1s cubic-bezier(0.14, 1.04, 0.1, 1);
+		transition-delay: 1.8s;
+		font-size: 1.5rem;
+	}
+
+	.embla__slide:not(.is-snapped) p {
+		transform: translateY(100%);
+	}
+
+	.embla__progress {
+		border-radius: 1.8rem;
+		box-shadow: inset 0 0 0 0.2rem black;
+		background-color: blue;
+		position: relative;
+		height: 0.6rem;
+		justify-self: flex-end;
+		align-self: center;
+		width: 13rem;
+		max-width: 90%;
+		overflow: hidden;
+	}
+	.embla__progress__bar {
+		background-color: green;
 		position: absolute;
-		right: 1rem;
+		width: 100%;
+		top: 0;
+		bottom: 0;
+		left: -100%;
+	}
 
-		@include breakpoints.tablet {
-			-webkit-transform: translateY(-50%);
-			top: 50%;
-			transform: translateY(-50%);
+	.embla__parallax__layer {
+		display: flex;
+		justify-content: center;
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.embla__progress {
+		justify-self: center;
+		transition: opacity 0.3s ease-in-out;
+		width: 8rem;
+	}
+
+	.embla__progress__bar {
+		animation-name: autoplay-progress;
+		animation-timing-function: linear;
+		animation-iteration-count: 1;
+	}
+
+	@keyframes autoplay-progress {
+		0% {
+			transform: translate3d(0, 0, 0);
 		}
-
-		&__index,
-		&__length {
-			color: #fff;
-			font-size: 1.125rem;
-			line-height: 1.7;
-		}
-
-		&__time {
-			background-color: #fff;
-			display: flex;
-			height: 1px;
-			position: relative;
-			width: 113px;
-		}
-
-		&__timeSlider {
-			background-color: white;
-			height: 3px;
-			left: 0;
-			position: absolute;
-			top: -0.75px;
-			width: 100%;
+		100% {
+			transform: translate3d(100%, 0, 0);
 		}
 	}
 </style>

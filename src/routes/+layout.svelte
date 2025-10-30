@@ -22,9 +22,15 @@
 					<span class="Header__dropdownLogo"><ChevronLeft /></span>
 				</div>
 				<menu class="DropdownMenu">
-					<li><NavLink class="flex w-full" href="/layout/living">Living</NavLink></li>
-					<li><NavLink class="flex w-full" href="/layout/sleeping">Sleeping</NavLink></li>
-					<li><NavLink class="flex w-full" href="/layout/relaxing">Relaxing</NavLink></li>
+					<li>
+						<NavLink class="flex w-full" href="/layout/living">Living</NavLink>
+					</li>
+					<li>
+						<NavLink class="flex w-full" href="/layout/sleeping">Sleeping</NavLink>
+					</li>
+					<li>
+						<NavLink class="flex w-full" href="/layout/relaxing">Relaxing</NavLink>
+					</li>
 				</menu>
 			</li>
 			<li class="Header__navItem">

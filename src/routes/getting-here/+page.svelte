@@ -50,11 +50,36 @@
 </script>
 
 <PageLayout title="Getting Here">
-	<h2>How to get here</h2>
+	<div class="GettingHere">
+		<div>
+			<p>
+				Chalet Ceilidh can easily be accessed. Please see the below information on how to get here.
+			</p>
 
-	<CardWrapper>
-		<Card data={cards} />
-	</CardWrapper>
-
-	<UsefulLinks data={usefulLinks} />
+			<CardWrapper>
+				<Card data={cards} />
+			</CardWrapper>
+		</div>
+		<aside>
+			<UsefulLinks data={usefulLinks} />
+		</aside>
+	</div>
 </PageLayout>
+
+<style lang="scss">
+	@use '$lib/styles/partials/breakpoints.scss';
+
+	.GettingHere {
+		display: flex;
+		justify-content: space-between;
+		flex-direction: column;
+
+		@include breakpoints.desktop {
+			flex-direction: row;
+		}
+
+		p {
+			margin-block: 2rem;
+		}
+	}
+</style>

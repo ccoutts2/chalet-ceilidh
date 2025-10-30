@@ -1,16 +1,20 @@
 <script lang="ts">
 	import type { PageProps } from './$types';
+	import { page } from '$app/state';
 	import PageLayout from '$lib/components/PageLayout.svelte';
 	import Carousel from '$lib/components/ui/Carousel.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
 	import UsefulLinks from '$lib/components/ui/UsefulLinks.svelte';
 	import type { UsefulLinksProps } from '$lib/types';
+	import type { EmblaOptionsType } from 'embla-carousel';
 
 	let { data }: PageProps = $props();
 
 	const { title, pageDescription, carouselItems, features, slug, copy } = $derived(
 		data.pageContent
 	);
+
+	const options: EmblaOptionsType = { loop: true, duration: 40 };
 
 	const usefulLinks: UsefulLinksProps[] = [
 		{
@@ -34,8 +38,9 @@
 			{pageDescription}
 		</p>
 	</div>
-	<Carousel data={carouselItems} />
-
+	{#key page.url.pathname}
+		<Carousel slides={carouselItems} {options} />
+	{/key}
 	<Features data={features} heading="At a Glance" />
 
 	{#if slug === 'summer'}
