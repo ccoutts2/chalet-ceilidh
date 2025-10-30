@@ -96,107 +96,113 @@
 	@use '../../styles/partials/breakpoints';
 
 	.embla {
-		max-width: 100vw;
+		width: 100%;
 		margin: auto;
+
 		--slide-height: 35rem;
 		--slide-spacing: 2rem;
 		--slide-size: 100%;
-	}
-	.embla__viewport {
-		overflow: hidden;
-	}
-	.embla__container {
-		cursor: grab;
-		display: flex;
-		margin-left: calc(var(--slide-spacing) * -1);
-		touch-action: pan-y pinch-zoom;
 
-		:active {
-			cursor: grabbing;
+		&__viewport {
+			overflow: hidden;
+			position: relative;
 		}
-	}
-	.embla__slide {
-		flex: 0 0 var(--slide-size);
-		min-width: 0;
-		padding-left: var(--slide-spacing);
-		transform: translate3d(0, 0, 0);
-	}
-	.embla__slide__img {
-		display: block;
-		height: var(--slide-height);
-		object-fit: cover;
-		width: 100%;
-		object-fit: cover;
-		transform: scale(1);
-		transition: transform 2s cubic-bezier(1, 0.15, 0.46, 0.95);
-		transition-delay: 0.4s;
-	}
 
-	.embla__slide:not(.is-snapped) .embla__slide__img {
-		transform: scale(1.1);
-	}
+		&__container {
+			cursor: grab;
+			display: flex;
+			margin-left: calc(var(--slide-spacing) * -1);
+			touch-action: pan-y pinch-zoom;
 
-	.embla__slide__caption {
-		bottom: 0.25rem;
-		text-align: left;
-		color: black;
-		font-size: 2rem;
-		text-transform: uppercase;
-		pointer-events: none;
-		overflow: hidden;
-		position: relative;
-	}
+			:active {
+				cursor: grabbing;
+			}
+		}
+		&__slide {
+			flex: 0 0 var(--slide-size);
+			min-width: 0;
+			padding-left: var(--slide-spacing);
+			transform: translate3d(0, 0, 0);
+		}
+		&__slide__img {
+			display: block;
+			height: var(--slide-height);
+			object-fit: cover;
+			width: 100%;
+			object-fit: cover;
+			transform: scale(1);
+			transition: transform 2s cubic-bezier(1, 0.15, 0.46, 0.95);
+			transition-delay: 0.4s;
+		}
 
-	.embla__slide__text {
-		transform: translateY(0%);
-		transition: transform 1s cubic-bezier(0.14, 1.04, 0.1, 1);
-		transition-delay: 1.8s;
-		font-size: 1.5rem;
-	}
+		&__slide:not(.is-snapped) &__slide__img {
+			transform: scale(1.1);
+		}
 
-	.embla__slide:not(.is-snapped) p {
-		transform: translateY(100%);
-	}
+		&__slide__caption {
+			bottom: 0.25rem;
+			text-align: left;
+			color: black;
+			font-size: 2rem;
+			text-transform: uppercase;
+			pointer-events: none;
+			overflow: hidden;
+			position: relative;
+		}
 
-	.embla__progress {
-		border-radius: 1.8rem;
-		box-shadow: inset 0 0 0 0.2rem black;
-		background-color: blue;
-		position: relative;
-		height: 0.6rem;
-		justify-self: flex-end;
-		align-self: center;
-		width: 13rem;
-		max-width: 90%;
-		overflow: hidden;
-	}
-	.embla__progress__bar {
-		background-color: green;
-		position: absolute;
-		width: 100%;
-		top: 0;
-		bottom: 0;
-		left: -100%;
-	}
+		&__slide__text {
+			transform: translateY(0%);
+			transition: transform 1s cubic-bezier(0.14, 1.04, 0.1, 1);
+			transition-delay: 1.8s;
+			font-size: 1.5rem;
+		}
 
-	.embla__parallax__layer {
-		display: flex;
-		justify-content: center;
-		position: relative;
-		width: 100%;
-		overflow: hidden;
-	}
+		&__slide:not(.is-snapped) p {
+			transform: translateY(100%);
+		}
 
-	.embla__progress {
-		justify-self: center;
-		transition: opacity 0.3s ease-in-out;
-		width: 8rem;
-	}
+		&__progress {
+			border-radius: 1.8rem;
+			background-color: transparent;
+			border: 0.5px solid #403a34;
+			height: 0.5rem;
+			justify-self: flex-end;
+			align-self: center;
+			width: 15rem;
+			max-width: 90%;
+			overflow: hidden;
+			position: absolute;
+			bottom: 1rem;
+			right: 0;
+		}
+		&__progress__bar {
+			background-color: #403a34;
+			position: absolute;
+			width: 100%;
+			top: 0;
+			bottom: 0;
+			left: -100%;
+		}
 
-	.embla__progress__bar {
-		animation-name: autoplay-progress;
-		animation-timing-function: linear;
-		animation-iteration-count: 1;
+		&__parallax__layer {
+			display: flex;
+			justify-content: center;
+			position: relative;
+			width: 100%;
+			overflow: hidden;
+		}
+
+		&__progress {
+			justify-self: center;
+			transition: opacity 0.3s ease-in-out;
+			width: 8rem;
+		}
+
+		&__progress__bar {
+			animation-name: autoplay-progress;
+			animation-timing-function: linear;
+			animation-iteration-count: 1;
+		}
 	}
 
 	@keyframes autoplay-progress {
