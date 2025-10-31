@@ -8,27 +8,25 @@
 	let { data, externalLink = false }: CardProps = $props();
 </script>
 
-{#if data.length > 1}
+{#if data && data.length > 0}
 	<ul class="Cards">
-		{#each data as item}
-			{@const Icon = item.icon}
+		{#each data as { title, dataLinks, copy, icon, href }}
+			{@const Icon = icon}
 			<li>
 				<article class="Card">
 					<header class="Card__header">
-						<h3>{item.title}</h3>
+						<h3>{title}</h3>
 						<div class="Card__icon">
 							<Icon />
 						</div>
 					</header>
 
-					<p>{@html item.copy}</p>
-					{#if item.dataLinks}
+					<p>{@html copy}</p>
+					{#if dataLinks}
 						{#if externalLink}
-							<a href={item.href} target="blank"
-								><span class="visually-hidden">Link to {item.title}</span></a
-							>
+							<a {href} target="blank"><span class="visually-hidden">Link to {title}</span></a>
 						{:else}
-							<a href={item.href}><span class="visually-hidden">Link to {item.title}</span></a>
+							<a {href}><span class="visually-hidden">Link to {title}</span></a>
 						{/if}
 					{/if}
 				</article>
@@ -36,20 +34,20 @@
 		{/each}
 	</ul>
 {:else}
-	{#each data as item}
-		{@const Icon = item.icon}
+	{#each data as { title, dataLinks, copy, icon, href }}
+		{@const Icon = icon}
 
 		<article class="Card">
 			<header class="Card__header">
-				<h3>{item.title}</h3>
+				<h3>{title}</h3>
 				<div class="Card__icon">
 					<Icon />
 				</div>
 			</header>
 
-			<p>{@html item.copy}</p>
-			{#if item.dataLinks}
-				<a href={item.href}><span class="visually-hidden">Link to {item.title}</span></a>
+			<p>{@html copy}</p>
+			{#if dataLinks}
+				<a {href}><span class="visually-hidden">Link to {title}</span></a>
 			{/if}
 		</article>
 	{/each}

@@ -6,6 +6,7 @@
 	import type { Cards, UsefulLinksProps } from '$lib/types';
 
 	import { Plane, TrainFront, Car } from '@lucide/svelte';
+	import Map from '$lib/components/Map.svelte';
 
 	let cards: Cards[] = [
 		{
@@ -56,14 +57,18 @@
 				Chalet Ceilidh can easily be accessed. Please see the below information on how to get here.
 			</p>
 
-			<CardWrapper>
-				<Card data={cards} />
-			</CardWrapper>
+			{#if cards}
+				<CardWrapper>
+					<Card data={cards} />
+				</CardWrapper>
+			{/if}
 		</div>
 		<aside>
 			<UsefulLinks data={usefulLinks} />
 		</aside>
 	</div>
+
+	<Map />
 </PageLayout>
 
 <style lang="scss">
@@ -73,9 +78,11 @@
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
+		gap: 5rem;
 
 		@include breakpoints.desktop {
 			flex-direction: row;
+			gap: 0;
 		}
 
 		p {

@@ -13,7 +13,9 @@
 	{@render children?.()}
 </div>
 
-<style>
+<style lang="scss">
+	@use '$lib/styles/partials/breakpoints.scss';
+
 	.CardWrapper {
 		position: relative;
 		width: 100%;
@@ -22,8 +24,12 @@
 	.CardWrapper[data-layout='vertical'] :global(ul:first-child) {
 		display: flex;
 		flex-direction: column;
-		min-width: 40rem;
+		width: 100%;
 		max-width: fit-content;
+
+		@include breakpoints.tablet {
+			min-width: 40rem;
+		}
 	}
 
 	.CardWrapper[data-layout='horizontal'] :global(ul:first-child) {
