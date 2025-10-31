@@ -22,7 +22,7 @@
 
 	let plugins = [
 		Autoplay({
-			delay: 6000,
+			delay: 4500,
 			stopOnInteraction: false,
 			stopOnMouseEnter: false
 		}),
@@ -131,7 +131,7 @@
 			width: 100%;
 			object-fit: cover;
 			transform: scale(1);
-			transition: transform 2s cubic-bezier(1, 0.15, 0.46, 0.95);
+			transition: transform 1.5s cubic-bezier(1, 0.15, 0.46, 0.95);
 			transition-delay: 0.4s;
 		}
 
@@ -153,7 +153,7 @@
 		&__slide__text {
 			transform: translateY(0%);
 			transition: transform 1s cubic-bezier(0.14, 1.04, 0.1, 1);
-			transition-delay: 1.8s;
+			transition-delay: 1.5s;
 			font-size: 1.5rem;
 		}
 

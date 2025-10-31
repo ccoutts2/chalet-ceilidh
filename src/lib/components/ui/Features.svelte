@@ -1,12 +1,39 @@
 <script lang="ts">
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { onMount } from 'svelte';
+
 	let { data, heading }: { data: any; heading: string } = $props();
+
+	let scrollSection: HTMLElement;
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		const features = gsap.utils.toArray('.Features__item');
+
+		gsap.set(features, { autoAlpha: 0 });
+
+		gsap.to(features, {
+			autoAlpha: 1,
+			stagger: 0.1,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: scrollSection,
+				start: 'top center',
+				toggleActions: 'play none none reverse'
+			}
+		});
+	});
 </script>
 
-<section class="Features">
+<section class="Features" bind:this={scrollSection}>
 	<h2 class="Features__heading">{heading}</h2>
 	<ul class="Features__list">
 		{#each data as feature}
-			<li class="Features__item">{feature}</li>
+			<div class="overflow-hidden">
+				<li class="Features__item">{feature}</li>
+			</div>
 		{/each}
 	</ul>
 </section>

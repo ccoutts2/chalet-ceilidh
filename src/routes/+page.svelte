@@ -7,10 +7,13 @@
 	import { Snowflake, Sun } from '@lucide/svelte';
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 
 	let { data } = $props();
 
+	let isInView: boolean = $state(false);
+
+	let headingContainer: HTMLHeadElement;
 	let tl: GSAPTimeline;
 	let container: HTMLElement;
 
@@ -43,6 +46,29 @@
 		'Nespresso maker with complimentary capsules',
 		'Selection of Fine Teas'
 	];
+
+	const callback: IntersectionObserverCallback = (entries) => {
+		entries.forEach((entry) => {
+			isInView = entry.isIntersecting;
+		});
+	};
+
+	const options = {
+		root: null,
+		rootMargin: '0px',
+		threshold: 0.1
+	};
+
+	let observer: IntersectionObserver;
+
+	onMount(() => {
+		observer = new IntersectionObserver(callback, options);
+		observer.observe(headingContainer);
+	});
+
+	onDestroy(() => {
+		observer?.disconnect();
+	});
 
 	const cards: Cards[] = [
 		{
@@ -90,10 +116,14 @@
 	</picture>
 
 	<div class="Home__sectionRow">
-		<div>
-			<h1 class="Home__title">Chalet Ceilidh Zinal</h1>
-			<p class="text-2xl text-pretty italic">( pronounced kaylee )</p>
-		</div>
+		<header bind:this={headingContainer} class="Home__headingContainer {isInView ? 'in-view' : ''}">
+			<div class="overflow-hidden">
+				<h1 class="Home__title">Chalet Ceilidh Zinal</h1>
+			</div>
+			<div class="overflow-hidden">
+				<p class="text-2xl text-pretty italic">( pronounced kaylee )</p>
+			</div>
+		</header>
 		<p>
 			Chalet Ceilidh is an outstanding luxury ski chalet and one of the few privately owned chalets
 			available to book exclusively in the traditional but delightful mountain village of Zinal
@@ -182,8 +212,23 @@
 			}
 		}
 
+		&__headingContainer {
+			&.in-view .Home__title,
+			&.in-view p {
+				transform: translateY(0%);
+			}
+
+			p {
+				transform: translateY(100%);
+				transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);
+				transition-delay: 0.2s;
+			}
+		}
+
 		&__title {
 			font-size: clamp(2.5rem, 3vw, 4rem);
+			transform: translateY(100%);
+			transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);
 		}
 
 		&__sectionRow {

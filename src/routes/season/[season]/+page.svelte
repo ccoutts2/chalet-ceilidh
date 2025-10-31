@@ -41,11 +41,16 @@
 	{#key page.url.pathname}
 		<Carousel slides={carouselItems} {options} />
 	{/key}
-	<Features data={features} heading="At a Glance" />
-
-	{#if slug === 'summer'}
-		<UsefulLinks data={usefulLinks} />
-	{/if}
+	<div class="flex flex-col items-start justify-between gap-8 lg:flex-row">
+		<div class="flex-2">
+			<Features data={features} heading="At a Glance" />
+		</div>
+		{#if slug === 'summer'}
+			<aside class="flex flex-1 justify-end py-8">
+				<UsefulLinks data={usefulLinks} />
+			</aside>
+		{/if}
+	</div>
 
 	<section class="flex flex-col items-center justify-center gap-8 py-8 md:py-12">
 		<h2>Information</h2>
