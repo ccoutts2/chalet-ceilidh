@@ -7,7 +7,7 @@
 		const L = await import('leaflet');
 		await import('leaflet/dist/leaflet.css');
 
-		const map = L.map(mapContainer).setView([46.137972, 7.626603], 16);
+		const map = L.map(mapContainer).setView([46.137972, 7.626603], 15);
 
 		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; OpenStreetMap contributors'
@@ -16,6 +16,10 @@
 		L.tileLayer('https://tiles.opensnowmap.org/pistes/{z}/{x}/{y}.png', {
 			attribution: '&copy; OpenSnowMap contributors'
 		}).addTo(map);
+
+		const marker = L.marker([46.137972, 7.626603]).addTo(map);
+
+		marker.bindPopup('<b>Chalet Ceilidh</b>').openPopup();
 	});
 </script>
 
@@ -29,6 +33,10 @@
 	}
 
 	:global(.leaflet-right) {
+		display: none;
+	}
+
+	:global(.leaflet-left) {
 		display: none;
 	}
 </style>

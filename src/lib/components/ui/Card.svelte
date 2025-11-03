@@ -10,47 +10,33 @@
 
 {#if data && data.length > 0}
 	<ul class="Cards">
-		{#each data as { title, dataLinks, copy, icon, href }}
-			{@const Icon = icon}
+		{#each data as card}
+			{@const Icon = card.icon}
 			<li>
 				<article class="Card">
 					<header class="Card__header">
-						<h3>{title}</h3>
+						<h3>{card.title}</h3>
 						<div class="Card__icon">
 							<Icon />
 						</div>
 					</header>
 
-					<p>{@html copy}</p>
-					{#if dataLinks}
+					<div>
+						{@html card.copy}
+					</div>
+					{#if card.dataLinks && card.href}
 						{#if externalLink}
-							<a {href} target="blank"><span class="visually-hidden">Link to {title}</span></a>
+							<a href={card.href} target="_blank"
+								><span class="visually-hidden">Link to {card.title}</span></a
+							>
 						{:else}
-							<a {href}><span class="visually-hidden">Link to {title}</span></a>
+							<a href={card.href}><span class="visually-hidden">Link to {card.title}</span></a>
 						{/if}
 					{/if}
 				</article>
 			</li>
 		{/each}
 	</ul>
-{:else}
-	{#each data as { title, dataLinks, copy, icon, href }}
-		{@const Icon = icon}
-
-		<article class="Card">
-			<header class="Card__header">
-				<h3>{title}</h3>
-				<div class="Card__icon">
-					<Icon />
-				</div>
-			</header>
-
-			<p>{@html copy}</p>
-			{#if dataLinks}
-				<a {href}><span class="visually-hidden">Link to {title}</span></a>
-			{/if}
-		</article>
-	{/each}
 {/if}
 
 <style lang="scss">

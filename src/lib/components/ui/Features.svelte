@@ -6,24 +6,33 @@
 	let { data, heading }: { data: any; heading: string } = $props();
 
 	let scrollSection: HTMLElement;
+	let isPageReady: boolean = $state(false);
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
+		isPageReady = true;
+
 		const features = gsap.utils.toArray('.Features__item');
 
-		gsap.set(features, { autoAlpha: 0 });
+		gsap.set(features, { opacity: 1, y: 0 });
 
-		gsap.to(features, {
-			autoAlpha: 1,
-			stagger: 0.1,
-			ease: 'none',
-			scrollTrigger: {
-				trigger: scrollSection,
-				start: 'top center',
-				toggleActions: 'play none none reverse'
-			}
+		const ctx = gsap.context(() => {
+			gsap.from(features, {
+				opacity: 0,
+				y: 50,
+				delay: 0.3,
+				duration: 1,
+				ease: 'power2.out',
+				stagger: 0.1,
+				scrollTrigger: {
+					trigger: scrollSection,
+					start: 'top bottom-=25%',
+					once: true
+				}
+			});
 		});
+		return () => ctx.revert();
 	});
 </script>
 
@@ -31,9 +40,7 @@
 	<h2 class="Features__heading">{heading}</h2>
 	<ul class="Features__list">
 		{#each data as feature}
-			<div class="overflow-hidden">
-				<li class="Features__item">{feature}</li>
-			</div>
+			<li class="Features__item">{feature}</li>
 		{/each}
 	</ul>
 </section>
@@ -61,6 +68,7 @@
 			border: 1px solid #dacfc1;
 			display: inline-block;
 			font-size: 0.8em;
+			opacity: 0;
 			padding: 0.85em 1em;
 			text-transform: uppercase;
 

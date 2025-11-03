@@ -8,8 +8,9 @@
 	import gsap from 'gsap';
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { onDestroy, onMount } from 'svelte';
+	import type { PageProps } from './$types';
 
-	let { data } = $props();
+	let { data }: PageProps = $props();
 
 	let isInView: boolean = $state(false);
 
@@ -133,7 +134,7 @@
 	<section class="Home__sectionRow | relative gap-8 xl:max-h-[175vh]">
 		<div class="Home__information">
 			<h2>About Chalet Ceilidh</h2>
-			<p>
+			<p class="mt-4">
 				This luxury holiday home sits on a large plot of land with panoramic views of the
 				surrounding peaks of the “Imperial Crown” and is within easy walking distance of the village
 				and ski lift.
@@ -212,25 +213,6 @@
 			}
 		}
 
-		&__headingContainer {
-			&.in-view .Home__title,
-			&.in-view p {
-				transform: translateY(0%);
-			}
-
-			p {
-				transform: translateY(100%);
-				transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);
-				transition-delay: 0.2s;
-			}
-		}
-
-		&__title {
-			font-size: clamp(2.5rem, 3vw, 4rem);
-			transform: translateY(100%);
-			transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);
-		}
-
 		&__sectionRow {
 			@include mixins.flex($direction: column, $justify: space-between, $gap: 2rem);
 			background-color: #f6f1eb;
@@ -238,6 +220,7 @@
 
 			@include breakpoints.desktop {
 				flex-direction: row;
+				align-items: flex-start;
 				padding-block: 5rem;
 			}
 
@@ -256,6 +239,25 @@
 			p {
 				flex: 1.125;
 			}
+		}
+
+		&__headingContainer {
+			&.in-view .Home__title,
+			&.in-view p {
+				transform: translateY(0%);
+			}
+
+			p {
+				transform: translateY(100%);
+				transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);
+				transition-delay: 0.2s;
+			}
+		}
+
+		&__title {
+			font-size: clamp(2.5rem, 3vw, 4rem);
+			transform: translateY(100%);
+			transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);
 		}
 
 		&__information {

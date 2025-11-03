@@ -12,17 +12,23 @@
 		{
 			title: 'By Air',
 			icon: Plane,
-			copy: '<p>Zinal is easily accessible from a variety of airports including Geneva, Zurich and Bern.</p><p>The nearest airport is Sion that can be reached by private flight or helicopter.</p>'
+			copy: '<p>Zinal is easily accessible from a variety of airports including Geneva, Zurich and Bern.</p><p>The nearest airport is Sion that can be reached by private flight or helicopter.</p>',
+			dataLinks: false,
+			href: undefined
 		},
 		{
 			title: 'By Rail',
 			icon: TrainFront,
-			copy: '<p>There is an excellent rail link from Geneva airport to Sierre.</p><p>At the bottom of the valley, Sierre is the nearest train station making rail connections to all over Europe simple.</p><p>From Sierre, the Post Bus links up to Vissoie with onward connections to Zinal.</p>'
+			copy: '<p>There is an excellent rail link from Geneva airport to Sierre.</p><p>At the bottom of the valley, Sierre is the nearest train station making rail connections to all over Europe simple.</p><p>From Sierre, the Post Bus links up to Vissoie with onward connections to Zinal.</p>',
+			dataLinks: false,
+			href: undefined
 		},
 		{
 			title: 'By Car',
 			icon: Car,
-			copy: '<p>Approximate journey times by car:</p><ul><li>Sierre: 30mins</li><li>Sion: 45 mins</li><li>Geneva: 2h 15mins</li><li>Bern: 2h 15mins</li><li>Zurich: 3h 15mins</li><li>Calais: 8h 30mins</li></ul>'
+			copy: '<p>Approximate journey times by car:</p><ul><li>Sierre: 30mins</li><li>Sion: 45 mins</li><li>Geneva: 2h 15mins</li><li>Bern: 2h 15mins</li><li>Zurich: 3h 15mins</li><li>Calais: 8h 30mins</li></ul>',
+			dataLinks: false,
+			href: undefined
 		}
 	];
 
@@ -82,7 +88,6 @@
 
 		@include breakpoints.desktop {
 			flex-direction: row;
-			gap: 0;
 		}
 
 		p {
