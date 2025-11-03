@@ -6,18 +6,14 @@
 	let { data, heading }: { data: any; heading: string } = $props();
 
 	let scrollSection: HTMLElement;
-	let isPageReady: boolean = $state(false);
 
 	onMount(() => {
 		gsap.registerPlugin(ScrollTrigger);
 
-		isPageReady = true;
-
-		const features = gsap.utils.toArray('.Features__item');
-
-		gsap.set(features, { opacity: 1, y: 0 });
-
 		const ctx = gsap.context(() => {
+			const features = gsap.utils.toArray('.Features__item');
+
+			gsap.set(features, { opacity: 1, y: 0 });
 			gsap.from(features, {
 				opacity: 0,
 				y: 50,
@@ -31,7 +27,7 @@
 					once: true
 				}
 			});
-		});
+		}, scrollSection);
 		return () => ctx.revert();
 	});
 </script>
