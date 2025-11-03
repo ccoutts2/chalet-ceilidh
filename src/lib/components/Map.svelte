@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { HouseIcon, type House } from '@lucide/svelte';
 	import { onMount } from 'svelte';
 
 	let mapContainer: HTMLDivElement;
@@ -17,8 +18,11 @@
 			attribution: '&copy; OpenSnowMap contributors'
 		}).addTo(map);
 
-		const marker = L.marker([46.137972, 7.626603]).addTo(map);
+		const houseIcon = L.icon({
+			iconUrl: '/assets/logos/house.svg'
+		});
 
+		const marker = L.marker([46.137972, 7.626603], { icon: houseIcon }).addTo(map);
 		marker.bindPopup('<b>Chalet Ceilidh</b>').openPopup();
 	});
 </script>
