@@ -8,6 +8,8 @@
 
 	let tl: GSAPTimeline;
 
+	let overlayButton: HTMLButtonElement;
+
 	const toggleMenuOverlay = () => {
 		tl.reversed(!tl.reversed());
 	};
@@ -23,29 +25,38 @@
 	};
 
 	const createMenuOverlayAnimation: Attachment = (container) => {
-		tl = gsap.timeline({ paused: true });
+		tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.inOut' } });
 
-		gsap.set(container, { opacity: 1, clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0%)' });
+		gsap.set(container, { opacity: 1, clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)' });
 
 		gsap.set('.MenuOverlay__itemHolder', {
 			y: 75
 		});
 
+		gsap.set(overlayButton, {
+			yPercent: -100
+		});
+
 		tl.to(container, {
-			clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)',
-			ease: 'power4.inOut',
+			clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
 			duration: 1
 		})
 			.to(
 				'.MenuOverlay__itemHolder',
 				{
 					y: 0,
-					ease: 'power4.inOut',
 					duration: 0.8,
 					delay: 0.4,
 					stagger: 0.1
 				},
 				'<'
+			)
+			.to(
+				overlayButton,
+				{
+					yPercent: 0
+				},
+				'-=1.2'
 			)
 			.reverse();
 	};
@@ -59,18 +70,14 @@
 	<div class="flex justify-between align-top">
 		<Logo />
 		<div class="MenuOverlay__button">
-			<button onclick={toggleMenuOverlay}>Close</button>
+			<button onclick={toggleMenuOverlay} bind:this={overlayButton}>Close</button>
 		</div>
 	</div>
 	<nav class="MenuOverlay__nav">
 		<ul class="MenuOverlay__list">
 			<li class="MenuOverlay__item">
 				<div class="MenuOverlay__itemHolder">
-					<NavLink
-						class="!text-4xl tracking-tight"
-						onclick={(e: MouseEvent) => handleNavigation(e, '/layout')}>Layout</NavLink
-					>
-
+					<span class="!text-4xl tracking-tight">Layout</span>
 					<menu class="SideMenu">
 						<li>
 							<NavLink
@@ -156,6 +163,7 @@
 
 		&__button {
 			@include mixins.flex($justify: flex-end);
+			overflow: hidden;
 			z-index: 999;
 		}
 

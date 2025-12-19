@@ -1,14 +1,54 @@
 <script lang="ts">
-	import '../lib/styles/globals.css';
-	import type { Snippet } from 'svelte';
+	import '$lib/styles/globals.css';
+	import gsap from 'gsap';
+	import { onMount, type Snippet } from 'svelte';
 	import NavBar from '$lib/components/navigation/NavBar.svelte';
 	import NavLink from '$lib/components/navigation/NavLink.svelte';
 	import MenuOverlay from '$lib/components/navigation/MenuOverlay.svelte';
 	import { ChevronLeft } from '@lucide/svelte';
 	import Footer from '$lib/components/Footer.svelte';
 	import Logo from '$lib/components/Logo.svelte';
+	import { page } from '$app/state';
 
 	let { children }: { children: Snippet } = $props();
+
+	let tl: GSAPTimeline;
+	let container: HTMLButtonElement;
+	let dropdownMenu: HTMLMenuElement;
+
+	let isDropdownMenuOpen: boolean = $state(false);
+
+	const currentPage = $derived(page.url);
+
+	onMount(() => {
+		tl = gsap.timeline({ paused: true });
+
+		tl.to(dropdownMenu, {
+			duration: 0.75,
+			height: 'auto',
+			ease: 'power2.in'
+		});
+	});
+
+	const toggleDropDownMenu = () => {
+		if (isDropdownMenuOpen) {
+			tl.reverse();
+			isDropdownMenuOpen = false;
+		} else {
+			tl.play();
+			isDropdownMenuOpen = true;
+		}
+	};
+
+	$effect(() => {
+		if (currentPage) {
+			tl.reverse();
+			isDropdownMenuOpen = false;
+		} else {
+			tl.play();
+			isDropdownMenuOpen = true;
+		}
+	});
 </script>
 
 <header class="Header">
@@ -17,21 +57,12 @@
 
 		<ul class="Header__navList">
 			<li class="Header__navItem">
-				<div class="Header__navDropdown">
+				<button class="Header__navDropdown" onclick={toggleDropDownMenu} bind:this={container}>
 					<p>Layout</p>
-					<span class="Header__dropdownLogo"><ChevronLeft /></span>
-				</div>
-				<menu class="DropdownMenu">
-					<li>
-						<NavLink class="flex w-full" href="/layout/living">Living</NavLink>
-					</li>
-					<li>
-						<NavLink class="flex w-full" href="/layout/sleeping">Sleeping</NavLink>
-					</li>
-					<li>
-						<NavLink class="flex w-full" href="/layout/relaxing">Relaxing</NavLink>
-					</li>
-				</menu>
+					<span class="Header__dropdownLogo {isDropdownMenuOpen ? 'open' : ''}"
+						><ChevronLeft /></span
+					>
+				</button>
 			</li>
 			<li class="Header__navItem">
 				<NavLink href="/season/winter">Winter</NavLink>
@@ -48,6 +79,17 @@
 		</ul>
 		<MenuOverlay />
 	</NavBar>
+	<menu class="DropdownMenu" bind:this={dropdownMenu}>
+		<li>
+			<NavLink class="flex w-full" href="/layout/living">Living</NavLink>
+		</li>
+		<li>
+			<NavLink class="flex w-full" href="/layout/sleeping">Sleeping</NavLink>
+		</li>
+		<li>
+			<NavLink class="flex w-full" href="/layout/relaxing">Relaxing</NavLink>
+		</li>
+	</menu>
 </header>
 
 {@render children?.()}
@@ -88,53 +130,33 @@
 		&__dropdownLogo {
 			display: inline-block;
 			transform: rotate(0deg);
-			transition: transform 0.3s ease-out;
+			transition: transform 0.5s ease-in-out;
+
+			&.open {
+				transform: rotate(-90deg);
+			}
 		}
 
 		&__navItem {
 			text-transform: capitalize;
 		}
-
-		&__navItem:first-child:hover {
-			.DropdownMenu {
-				max-height: 10rem;
-				opacity: 1;
-				pointer-events: auto;
-				transform: translateY(0);
-				visibility: visible;
-				z-index: 100000;
-			}
-
-			.Header__dropdownLogo {
-				transform: rotate(-90deg);
-			}
-		}
 	}
 
 	.DropdownMenu {
-		background-color: #f6f1eb;
-		display: flex;
-		flex-direction: column;
-		left: 0;
-		max-height: 0;
-		min-width: 8rem;
-		opacity: 0;
-		overflow: hidden;
-		padding: 0.5rem;
-		pointer-events: none;
-		position: absolute;
-		top: 100%;
-		transform: translateY(-10px);
-		transition:
-			opacity 0.3s ease-out,
-			visibility 0.3s ease-out,
-			max-height 0.4s ease-out,
-			transform 0.3s ease-out;
-		visibility: hidden;
+		display: none;
+
+		@include breakpoints.desktop {
+			background-color: #f6f1eb;
+			border-bottom: 1px solid #403a34;
+			display: flex;
+			flex-direction: column;
+			overflow: hidden;
+			height: 0;
+			padding-inline: 5rem;
+		}
 
 		li {
-			padding: 0.5rem 0.25rem;
-			width: 100%;
+			padding: 0.5rem;
 			transition: all 0.3s;
 
 			&:hover {
