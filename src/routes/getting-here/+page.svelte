@@ -56,6 +56,14 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Getting Here | Chalet Ceilidh</title>
+	<meta
+		name="description"
+		content="This page shows information on how to get to the chalet by different transport, and includes a map of the area."
+	/>
+</svelte:head>
+
 <PageLayout title="Getting Here">
 	<div class="GettingHere">
 		<div>

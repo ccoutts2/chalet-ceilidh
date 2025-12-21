@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onDestroy, onMount, type Snippet } from 'svelte';
-	import { fly } from 'svelte/transition';
-	import { page } from '$app/state';
 
 	let { title, children }: { title: string; children: Snippet } = $props();
 
@@ -66,6 +64,7 @@
 		}
 
 		&__title {
+			color: #ad1a1a;
 			font-size: clamp(2.5rem, 3vw, 4rem);
 			transform: translateY(100%);
 			transition: transform 1s cubic-bezier(0.845, 0.05, 0.55, 0.95);

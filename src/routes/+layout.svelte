@@ -58,7 +58,7 @@
 		<ul class="Header__navList">
 			<li class="Header__navItem">
 				<button class="Header__navDropdown" onclick={toggleDropDownMenu} bind:this={container}>
-					<p>Layout</p>
+					<span>Layout</span>
 					<span class="Header__dropdownLogo {isDropdownMenuOpen ? 'open' : ''}"
 						><ChevronLeft /></span
 					>

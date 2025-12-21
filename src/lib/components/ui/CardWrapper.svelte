@@ -1,5 +1,7 @@
 <script lang="ts">
-	import type { Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
+
+	let cardWrapper: HTMLDivElement;
 
 	interface CardWrapper {
 		children: Snippet;

@@ -40,10 +40,10 @@
 
 				<section class="Layout__copy">
 					<div>
-						<h3>{selectedLayout.title}</h3>
+						<h3 class="pb-2">{selectedLayout.title}</h3>
 						<p>{selectedLayout.pageDescription}</p>
 					</div>
-					<a class="flex underline" href="/layout/{selectedLayout.slug}"
+					<a class="flex pt-2 underline" href="/layout/{selectedLayout.slug}"
 						>View Layout<span><ArrowUpRight /></span></a
 					>
 				</section>
@@ -133,7 +133,13 @@
 				gap: 2rem;
 				grid-column-end: 13;
 				grid-column-start: 5;
+				grid-template-rows: repeat(2, 1fr);
+				grid-template-columns: 1fr;
+			}
+
+			@include breakpoints.tablet {
 				grid-template-columns: repeat(2, 1fr);
+				grid-template-rows: 1fr;
 			}
 		}
 

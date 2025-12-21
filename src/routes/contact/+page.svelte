@@ -4,15 +4,7 @@
 	import CardWrapper from '$lib/components/ui/CardWrapper.svelte';
 	import type { Cards } from '$lib/types';
 
-	import {
-		House,
-		Bed,
-		RockingChair,
-		ReceiptText,
-		CalendarClock,
-		Phone,
-		Mail
-	} from '@lucide/svelte';
+	import { ReceiptText, CalendarClock, Phone, Mail } from '@lucide/svelte';
 
 	const contactDetails: Cards[] = [
 		{
@@ -45,6 +37,14 @@
 		}
 	];
 </script>
+
+<svelte:head>
+	<title>Contact | Chalet Ceilidh</title>
+	<meta
+		name="description"
+		content="This page shows information on how to contact Chalet Ceilidh's owner."
+	/>
+</svelte:head>
 
 <PageLayout title="Contact">
 	<div class="py-8">

@@ -14,6 +14,14 @@
 	const options: EmblaOptionsType = { loop: true, duration: 40 };
 </script>
 
+<svelte:head>
+	<title>Layout - {title} | Chalet Ceilidh</title>
+	<meta
+		name="description"
+		content="This page shows information on the {title} section of the ceilidh."
+	/>
+</svelte:head>
+
 <PageLayout title="Layout | {title}">
 	<div class="py-8 md:py-12">
 		<p>{pageDescription}</p>

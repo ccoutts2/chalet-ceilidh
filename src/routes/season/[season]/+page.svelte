@@ -32,6 +32,14 @@
 	];
 </script>
 
+<svelte:head>
+	<title>Season - {title} | Chalet Ceilidh</title>
+	<meta
+		name="description"
+		content="This page shows information on what you can get up to during {title} when you visit Chalet Ceilidh."
+	/>
+</svelte:head>
+
 <PageLayout title="{title} in the Val D'Anniviers">
 	<div class="py-8 md:py-12">
 		<p>

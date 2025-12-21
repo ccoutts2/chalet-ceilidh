@@ -56,7 +56,7 @@
 
 	const options = {
 		root: null,
-		rootMargin: '0px',
+		rootMargin: '16px',
 		threshold: 0.1
 	};
 
@@ -107,6 +107,14 @@
 		});
 	});
 </script>
+
+<svelte:head>
+	<title>Home | Chalet Ceilidh</title>
+	<meta
+		name="description"
+		content="This page is the home landing page for Chalet Ceilidh, including links to other parts of the site."
+	/>
+</svelte:head>
 
 <main class="Home">
 	<picture class="Home__hero" bind:this={container}>
@@ -272,7 +280,7 @@
 				max-width: 80ch;
 				padding-top: 3rem;
 				position: sticky;
-				top: 2rem;
+				top: 5rem;
 			}
 		}
 	}

@@ -1,15 +1,40 @@
 <script lang="ts">
+	import gsap from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import type { Cards } from '$lib/types';
+	import { onMount } from 'svelte';
 
 	interface CardProps {
 		data: Cards[];
 		externalLink?: boolean;
 	}
 	let { data, externalLink = false }: CardProps = $props();
+
+	let cards: HTMLUListElement | null = $state(null);
+
+	onMount(() => {
+		gsap.registerPlugin(ScrollTrigger);
+
+		if (!cards) return;
+
+		gsap.set(cards.children, { opacity: 1 });
+
+		gsap.from(cards.children, {
+			opacity: 0,
+			ease: 'power1.inOut',
+			duration: 0.8,
+			stagger: 0.1,
+			scrollTrigger: {
+				trigger: cards,
+				start: 'top bottom-=25%',
+				once: true
+			}
+		});
+	});
 </script>
 
 {#if data && data.length > 0}
-	<ul class="Cards">
+	<ul class="Cards" bind:this={cards}>
 		{#each data as card}
 			{@const Icon = card.icon}
 			<li>
@@ -56,6 +81,7 @@
 
 		li {
 			height: 100%;
+			opacity: 0;
 			width: 100%;
 		}
 	}
