@@ -9,6 +9,7 @@
 	import { ScrollTrigger } from 'gsap/ScrollTrigger';
 	import { onDestroy, onMount } from 'svelte';
 	import type { PageProps } from './$types';
+	import FadeInText from '$lib/components/ui/FadeInText.svelte';
 
 	let { data }: PageProps = $props();
 
@@ -17,6 +18,8 @@
 	let headingContainer: HTMLHeadElement;
 	let tl: GSAPTimeline;
 	let container: HTMLElement;
+	let chaletImgContainer: HTMLElement;
+	let chaletImg: HTMLImageElement;
 
 	const features: string[] = [
 		'Exclusive rental of the entire private chalet and all associated running costs',
@@ -92,19 +95,33 @@
 		gsap.registerPlugin(ScrollTrigger);
 
 		gsap.set(container, { clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)' });
+		gsap.set(chaletImg, { clipPath: 'inset(100% 0% 0% 0%)' });
 
 		if (!container) return;
 
-		tl = gsap.timeline().to(container, {
-			clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)',
-			ease: 'none',
-			scrollTrigger: {
-				trigger: container,
-				start: 'top top',
-				end: '+=700',
-				scrub: true
-			}
-		});
+		tl = gsap
+			.timeline()
+			.to(container, {
+				clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)',
+				ease: 'none',
+				scrollTrigger: {
+					trigger: container,
+					start: 'top top',
+					end: '+=700',
+					scrub: true
+				}
+			})
+			.to(chaletImg, {
+				clipPath: 'inset(0% 0% 0% 0%)',
+				ease: 'none',
+				duration: 4,
+				scrollTrigger: {
+					trigger: chaletImgContainer,
+					start: 'bottom bottom',
+					end: 'top top+=250px',
+					scrub: true
+				}
+			});
 	});
 </script>
 
@@ -133,42 +150,42 @@
 				<p class="text-2xl text-pretty italic">( pronounced kaylee )</p>
 			</div>
 		</header>
-		<p>
+		<FadeInText>
 			Chalet Ceilidh is an outstanding luxury ski chalet and one of the few privately owned chalets
 			available to book exclusively in the traditional but delightful mountain village of Zinal
 			situated close to Grimentz.
-		</p>
+		</FadeInText>
 	</div>
 	<section class="Home__sectionRow | relative gap-8 xl:max-h-[175vh]">
 		<div class="Home__information">
 			<h2>About Chalet Ceilidh</h2>
-			<p class="mt-4">
+			<FadeInText class="mt-4">
 				This luxury holiday home sits on a large plot of land with panoramic views of the
 				surrounding peaks of the “Imperial Crown” and is within easy walking distance of the village
 				and ski lift.
-			</p>
-			<p>
+			</FadeInText>
+			<FadeInText>
 				The chalet is a blend of contemporary décor and Alpine charm and has been beautifully
 				designed and furnished.
-			</p>
-			<p>
+			</FadeInText>
+			<FadeInText>
 				Sleeping up to eight guests in four bedrooms, the chalet is self catering giving you the
 				option to enjoy the specialties of the Valais in one of the many local restaurants, or for
 				cosy evenings in, there is a very well equipped modern kitchen.
-			</p>
-			<p>
+			</FadeInText>
+			<FadeInText>
 				Zinal and Grimentz nestle at the top of the Val d'Annivers, one of Switzerland's most
 				beautiful and still relatively unknown ski regions with 220km of ski runs and one of the
 				longest ski seasons in the Alps.
-			</p>
-			<p>
+			</FadeInText>
+			<FadeInText>
 				The area is perfect for family skiing and is also well known for it's extensive off piste
 				and mountain guiding for the more adventurous.
-			</p>
-			<p>
+			</FadeInText>
+			<FadeInText>
 				Lift queues are rare, the pistes uncrowded, the scenery is breathtaking and skiing simply
 				superb!
-			</p>
+			</FadeInText>
 		</div>
 		<aside class="flex-[1] xl:overflow-y-hidden">
 			<Features data={features} heading="Features" />
@@ -180,11 +197,26 @@
 		<LayoutSpace data={data.selectedLayout} />
 	</section>
 
-	<section class="Home__sectionRow">
+	<section class="Home__sectionRow" data-is-column="true">
 		<h2>See more of what we have to offer</h2>
-		<CardWrapper>
-			<Card data={cards} externalLink={false} />
-		</CardWrapper>
+		<div class="flex justify-between">
+			<CardWrapper>
+				<Card data={cards} externalLink={false} />
+			</CardWrapper>
+			<figure bind:this={chaletImgContainer} class="relative h-[50vh] w-[50vw]">
+				<img
+					class="absolute top-0 left-0 h-full w-full object-cover"
+					src="/assets/images/home/chalet-day.webp"
+					alt=""
+				/>
+				<img
+					bind:this={chaletImg}
+					class="absolute top-0 left-0 h-full w-full object-cover"
+					src="/assets/images/home/chalet-night.webp"
+					alt=""
+				/>
+			</figure>
+		</div>
 	</section>
 </main>
 

@@ -5,11 +5,11 @@
 	import PageLayout from '$lib/components/PageLayout.svelte';
 	import Carousel from '$lib/components/ui/Carousel.svelte';
 	import Features from '$lib/components/ui/Features.svelte';
+	import FadeInText from '$lib/components/ui/FadeInText.svelte';
 	let { data }: PageProps = $props();
 
-	const { title, pageDescription, carouselItems, features, creatureComforts, copy } = $derived(
-		data.pageContent
-	);
+	const { title, pageDescription, carouselItems, features, creatureComforts, copy, floorPlan } =
+		$derived(data.pageContent);
 
 	const options: EmblaOptionsType = { loop: true, duration: 40 };
 </script>
@@ -37,9 +37,12 @@
 	{#if creatureComforts?.length}
 		<Features data={creatureComforts} heading="Creature Comforts" />
 	{/if}
+	<figure>
+		<img src={floorPlan} alt="The floorplan for the {title} area." />
+	</figure>
 	<div class="flex flex-col gap-4 py-8 md:py-12">
 		{#each copy as sentence}
-			<p>{sentence}</p>
+			<FadeInText>{sentence}</FadeInText>
 		{/each}
 	</div>
 </PageLayout>

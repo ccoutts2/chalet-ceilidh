@@ -10,8 +10,8 @@ export interface Layout {
 	pageDescription: string;
 	carouselItems: CarouselSlides[];
 	features: string[];
-	floorPlan: string;
 	creatureComforts?: string[];
+	floorPlan: string;
 	copy: string[];
 }
 
@@ -49,7 +49,6 @@ export const layoutPageData: Layout[] = [
 			'Modern stainless steel kitchen',
 			'Ski & Boot Room'
 		],
-		floorPlan: '/assets/images/layout/living/swiss-ski-chalet-2.jpg',
 		creatureComforts: [
 			'Log fire with complimentary firewood',
 			'Sumptuous soft furnishings',
@@ -58,6 +57,7 @@ export const layoutPageData: Layout[] = [
 			'Nespresso Machine',
 			'Heated ski boot rack'
 		],
+		floorPlan: '/assets/images/layout/living/living-area.jpg',
 		copy: [
 			"By contrast, the floor to ceiling windows fill the dining area with plenty of light giving spectacular views of the snow covered peaks and the Val d'Anniviers whilst seated at the large square shaped table.",
 			'Stainless steel and wood give the kitchen a very contemporary feel. The kitchen is very well equipped with all modern appliances including a large American style fridge/freezer and Nespresso Machine.',
@@ -95,7 +95,6 @@ export const layoutPageData: Layout[] = [
 			'Heated towel rails',
 			'Individually controlled under floor heating'
 		],
-		floorPlan: '/assets/images/layout/living/swiss-ski-chalet-2.jpg',
 		creatureComforts: [
 			'Finest quality bed and bath linen',
 			'“Just Like Down” anti allergenic duvets and pillows',
@@ -104,6 +103,7 @@ export const layoutPageData: Layout[] = [
 			'Complimentary bath products',
 			'Faux fur throws and cushions'
 		],
+		floorPlan: '/assets/images/layout/living/swiss-ski-chalet-2.jpg',
 		copy: [
 			'One double room with king size bed has an en-suite shower room while the two other bedrooms share a bathroom and separate walk-in shower in the sauna room.',
 			'The top floor of this Zinal chalet hosts the master bedroom and luxurious en suite bathroom featuring a double ended bath and walk in shower. A glass door leads outside to a small balcony with fabulous views up and down the valley.',
@@ -144,7 +144,7 @@ export const layoutPageData: Layout[] = [
 			'PlayStation 3 and games',
 			'Smart TV, DVD with Sound Bar'
 		],
-		floorPlan: '/assets/images/layout/living/swiss-ski-chalet-2.jpg',
+		floorPlan: '/assets/images/layout/living/relaxing.jpg',
 		copy: [
 			'Relax in one of the “Muskoka” chairs on the large south facing deck and simply enjoy the view, crystal clear air and warmth of the sun or snuggle up by the log fire with a glass of wine and a good book. The galleried landing and mezzanine lounge is furnished with large comfy leather sofas and is the perfect quiet retreat from the bustle of downstairs to read or simply relax.',
 			'For the children, this is also a great place they can escape to after dinner to play board or play station games, watch TV or select a movie which they can settle down and watch together.'

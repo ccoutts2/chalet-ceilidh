@@ -2,6 +2,7 @@
 	import PageLayout from '$lib/components/PageLayout.svelte';
 	import Card from '$lib/components/ui/Card.svelte';
 	import CardWrapper from '$lib/components/ui/CardWrapper.svelte';
+	import FadeInText from '$lib/components/ui/FadeInText.svelte';
 	import type { Cards } from '$lib/types';
 
 	import { ReceiptText, CalendarClock, Phone, Mail } from '@lucide/svelte';
@@ -65,17 +66,17 @@
 	</div>
 
 	<div class="flex flex-col gap-4 pt-8">
-		<p>
+		<FadeInText>
 			The prices are for exclusive occupancy of Chalet Ceilidh for seven nights and includes bath
 			linen and beds made on arrival, complimentary toiletries and concierge services available
 			prior to and during your stay.
-		</p>
-		<p>
+		</FadeInText>
+		<FadeInText>
 			Your reservation will only be confirmed after receipt of your signed booking form and deposit.
-		</p>
-		<p>
+		</FadeInText>
+		<FadeInText>
 			The final balance is due 8 weeks before your holiday. Payment can only be made by bank
 			transfer.
-		</p>
+		</FadeInText>
 	</div>
 </PageLayout>

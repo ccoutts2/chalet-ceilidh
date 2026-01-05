@@ -48,7 +48,7 @@
 		padding: 5rem 1rem;
 
 		@include breakpoints.tablet {
-			padding-inline: 3rem;
+			padding: 7rem 3rem;
 		}
 
 		@include breakpoints.desktop {

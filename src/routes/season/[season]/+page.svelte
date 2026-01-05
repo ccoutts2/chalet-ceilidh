@@ -7,6 +7,7 @@
 	import UsefulLinks from '$lib/components/ui/UsefulLinks.svelte';
 	import type { UsefulLinksProps } from '$lib/types';
 	import type { EmblaOptionsType } from 'embla-carousel';
+	import FadeInText from '$lib/components/ui/FadeInText.svelte';
 
 	let { data }: PageProps = $props();
 
@@ -64,9 +65,9 @@
 		<h2>Information</h2>
 		<div class="flex max-w-[80ch] flex-col gap-6 leading-7">
 			{#each copy as sentence}
-				<p>
+				<FadeInText>
 					{sentence}
-				</p>
+				</FadeInText>
 			{/each}
 		</div>
 	</section>
