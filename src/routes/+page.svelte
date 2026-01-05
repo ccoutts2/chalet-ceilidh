@@ -99,29 +99,27 @@
 
 		if (!container) return;
 
-		tl = gsap
-			.timeline()
-			.to(container, {
-				clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)',
-				ease: 'none',
-				scrollTrigger: {
-					trigger: container,
-					start: 'top top',
-					end: '+=700',
-					scrub: true
-				}
-			})
-			.to(chaletImg, {
-				clipPath: 'inset(0% 0% 0% 0%)',
-				ease: 'none',
-				duration: 4,
-				scrollTrigger: {
-					trigger: chaletImgContainer,
-					start: 'bottom bottom',
-					end: 'top top+=250px',
-					scrub: true
-				}
-			});
+		tl = gsap.timeline().to(container, {
+			clipPath: 'polygon(15% 10%, 85% 10%, 85% 90%, 15% 90%)',
+			ease: 'none',
+			scrollTrigger: {
+				trigger: container,
+				start: 'top top',
+				end: '+=700',
+				scrub: true
+			}
+		});
+		gsap.to(chaletImg, {
+			clipPath: 'inset(0% 0% 0% 0%)',
+			ease: 'power1.out',
+			duration: 2,
+			delay: 0.8,
+			scrollTrigger: {
+				trigger: chaletImgContainer,
+				start: 'top 80%',
+				toggleActions: 'play none none none'
+			}
+		});
 	});
 </script>
 
@@ -199,11 +197,11 @@
 
 	<section class="Home__sectionRow" data-is-column="true">
 		<h2>See more of what we have to offer</h2>
-		<div class="flex justify-between">
+		<div class="my-8 flex flex-col justify-between gap-8 lg:my-24 lg:flex-row lg:gap-4 2xl:gap-0">
 			<CardWrapper>
 				<Card data={cards} externalLink={false} />
 			</CardWrapper>
-			<figure bind:this={chaletImgContainer} class="relative h-[50vh] w-[50vw]">
+			<figure bind:this={chaletImgContainer} class="relative h-[50vh] w-full lg:w-[50vw]">
 				<img
 					class="absolute top-0 left-0 h-full w-full object-cover"
 					src="/assets/images/home/chalet-day.webp"
